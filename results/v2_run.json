@@ -1,0 +1,58 @@
+{
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT",
+    "DOGEUSDT",
+    "ADAUSDT",
+    "TRXUSDT",
+    "LINKUSDT",
+    "SUIUSDT",
+    "AVAXUSDT",
+    "LTCUSDT",
+    "BCHUSDT",
+    "DOTUSDT",
+    "HBARUSDT",
+    "XLMUSDT",
+    "FILUSDT",
+    "UNIUSDT",
+    "NEARUSDT",
+    "AAVEUSDT"
+  ],
+  "grid_rows": 29,
+  "selected_rows": 24,
+  "selection": "rank 1 is the single highest May-June return at 2bp with >=30 validation trades; PEER/B1 and PCA3/B2 15m/4h are fixed controls",
+  "train": "2026-03-01/2026-05-01",
+  "validation": "2026-05-01/2026-07-01",
+  "holdout": "2026-07-01/2026-09-01",
+  "funding": "included from /fapi/v1/fundingRate markPrice and fundingRate; settlement cashflow is reported separately",
+  "feature_models": [
+    "B0",
+    "PEER",
+    "PCA1",
+    "PCA3",
+    "PCA5"
+  ],
+  "grid_models": [
+    "B0",
+    "PEER",
+    "PCA3",
+    "PCA1",
+    "PCA5"
+  ],
+  "frequencies_min": [
+    5,
+    15,
+    60
+  ],
+  "grid_rows_predeclared": 29,
+  "costs_bp": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "all_in_cost_definition": "one-way bps charged on net aggregate order turnover; no separate slippage"
+}

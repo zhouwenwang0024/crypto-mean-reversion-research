@@ -1,0 +1,29 @@
+[
+  {
+    "model": "B0",
+    "frequency_min": 15,
+    "center_hours": 4,
+    "scale_days": 7,
+    "entry_sigma": 2.0,
+    "exit_sigma": 0.5,
+    "hold_hours": 4
+  },
+  {
+    "model": "PEER",
+    "frequency_min": 15,
+    "center_hours": 4,
+    "scale_days": 7,
+    "entry_sigma": 2.0,
+    "exit_sigma": 0.5,
+    "hold_hours": 4
+  },
+  {
+    "model": "PCA3",
+    "frequency_min": 15,
+    "center_hours": 4,
+    "scale_days": 7,
+    "entry_sigma": 2.0,
+    "exit_sigma": 0.5,
+    "hold_hours": 4
+  }
+]

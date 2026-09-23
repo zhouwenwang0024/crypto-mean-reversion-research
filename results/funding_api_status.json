@@ -1,0 +1,125 @@
+{
+  "retrieved_utc": "2026-09-23T21:45:04.990527+00:00",
+  "results": [
+    {
+      "symbol": "BTCUSDT",
+      "status": "ok",
+      "rows": 552,
+      "path": "results\\funding_api\\BTCUSDT.parquet"
+    },
+    {
+      "symbol": "ETHUSDT",
+      "status": "ok",
+      "rows": 552,
+      "path": "results\\funding_api\\ETHUSDT.parquet"
+    },
+    {
+      "symbol": "BNBUSDT",
+      "status": "ok",
+      "rows": 552,
+      "path": "results\\funding_api\\BNBUSDT.parquet"
+    },
+    {
+      "symbol": "SOLUSDT",
+      "status": "ok",
+      "rows": 552,
+      "path": "results\\funding_api\\SOLUSDT.parquet"
+    },
+    {
+      "symbol": "XRPUSDT",
+      "status": "ok",
+      "rows": 552,
+      "path": "results\\funding_api\\XRPUSDT.parquet"
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "status": "ok",
+      "rows": 552,
+      "path": "results\\funding_api\\DOGEUSDT.parquet"
+    },
+    {
+      "symbol": "ADAUSDT",
+      "status": "ok",
+      "rows": 552,
+      "path": "results\\funding_api\\ADAUSDT.parquet"
+    },
+    {
+      "symbol": "TRXUSDT",
+      "status": "ok",
+      "rows": 552,
+      "path": "results\\funding_api\\TRXUSDT.parquet"
+    },
+    {
+      "symbol": "LINKUSDT",
+      "status": "ok",
+      "rows": 552,
+      "path": "results\\funding_api\\LINKUSDT.parquet"
+    },
+    {
+      "symbol": "SUIUSDT",
+      "status": "ok",
+      "rows": 552,
+      "path": "results\\funding_api\\SUIUSDT.parquet"
+    },
+    {
+      "symbol": "AVAXUSDT",
+      "status": "ok",
+      "rows": 552,
+      "path": "results\\funding_api\\AVAXUSDT.parquet"
+    },
+    {
+      "symbol": "LTCUSDT",
+      "status": "ok",
+      "rows": 552,
+      "path": "results\\funding_api\\LTCUSDT.parquet"
+    },
+    {
+      "symbol": "BCHUSDT",
+      "status": "ok",
+      "rows": 552,
+      "path": "results\\funding_api\\BCHUSDT.parquet"
+    },
+    {
+      "symbol": "DOTUSDT",
+      "status": "ok",
+      "rows": 552,
+      "path": "results\\funding_api\\DOTUSDT.parquet"
+    },
+    {
+      "symbol": "HBARUSDT",
+      "status": "ok",
+      "rows": 552,
+      "path": "results\\funding_api\\HBARUSDT.parquet"
+    },
+    {
+      "symbol": "XLMUSDT",
+      "status": "ok",
+      "rows": 552,
+      "path": "results\\funding_api\\XLMUSDT.parquet"
+    },
+    {
+      "symbol": "FILUSDT",
+      "status": "ok",
+      "rows": 552,
+      "path": "results\\funding_api\\FILUSDT.parquet"
+    },
+    {
+      "symbol": "UNIUSDT",
+      "status": "ok",
+      "rows": 552,
+      "path": "results\\funding_api\\UNIUSDT.parquet"
+    },
+    {
+      "symbol": "NEARUSDT",
+      "status": "ok",
+      "rows": 552,
+      "path": "results\\funding_api\\NEARUSDT.parquet"
+    },
+    {
+      "symbol": "AAVEUSDT",
+      "status": "ok",
+      "rows": 552,
+      "path": "results\\funding_api\\AAVEUSDT.parquet"
+    }
+  ]
+}

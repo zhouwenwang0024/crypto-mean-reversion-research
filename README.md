@@ -1,24 +1,29 @@
-# 20 币种均值回归研究
+# 20 个币种均值回归研究
 
-本目录是独立的离线研究项目，研究币安 USDT 线性永续的 1 分钟成交 K 线。原始池为 20 个预先指定合约；检查发现 TONUSDT 在 2026-06-23 之后停牌，7、8 月为零成交且价格不变，因此按形成期成交额和完整覆盖选择 FILUSDT 替换，并在 `results/universe_replacement.json` 留痕。最终仍为 20 个币、6 个月、2026-03-01 00:00 至 2026-09-01 00:00 UTC。
+这是一个离线、可复核的 Binance USDT 线性永续均值回归研究项目。最终研究池为 20 个标的、2026-03 至 2026-08 的 1 分钟数据。TONUSDT 在样本后段停牌，按预先规定的覆盖和形成期成交额规则替换为 FILUSDT，证据见 `results/universe_replacement.json`。
 
-回测净值部分目前处于审计状态：已发现固定仓位、B1 方向、延迟成交计账和共享净订单问题。请先阅读 [AUDIT.md](AUDIT.md)；现有收益图不能当作最终策略结论。
+最终修正版报告见 [`REPORT_V2.md`](REPORT_V2.md)。旧版回测曾有固定仓位、执行价前视和共享对冲腿成本问题；旧结果已在 [`AUDIT.md`](AUDIT.md) 中标记为无效，不应与 v2 结果混用。
 
-环境是 Python 3.10.9，依赖见 `requirements.txt`。本机没有 cargo，未做 Rust 编译。实际运行顺序：
+## 运行
+
+环境为 Python 3.10，依赖见 `requirements.txt`。本项目不需要 Rust/Cargo。
 
 ```powershell
-python src/research.py metadata       # 公开 exchangeInfo；失败会保留证据
-python src/research.py download --sample --workers 3
-python src/research.py download --workers 4
-python src/research.py funding
-python src/research.py quality
-python src/research.py analyze
-python src/research.py explore
-python -m pytest -p no:pytest_anchorpy -p no:anyio -p no:requests_mock -p no:pytest_ethereum --assert=plain -q
+python src/research_v2.py
+python -m py_compile src/research_v2.py tests/test_research_v2.py
+python -m pytest -p no:pytest_anchorpy -p no:anyio -p no:requests_mock -p no:pytest_ethereum --assert=plain -q tests
 ```
 
-本机直接 `python -m pytest -q` 会被全局 anchorpy 等插件与旧版 pytest 的 AST 重写兼容错误中断；上面的隔离插件命令实际通过 10 个测试。
+`research_v2.py` 会读取本地 Parquet，按 5、15、60 分钟构造完成柱，使用只依赖过去数据的 B0、等权 PEER（B1 类）和留一标的 PCA3（B2 类）。订单在信号柱结束并等待一个完整分钟后成交；现金账本在真实成交价、净订单成本和资金费结算后更新。主研究固定 29 个配置，先用 5—6 月验证，再单独报告 7—8 月留出期。
 
-行情月包先写 `.part`，校验官方 `.CHECKSUM` 后转成 ZSTD Parquet，并回读验证后删除临时 ZIP。`data/` 和 `results/` 是本地产物，不应提交大型原始文件。`results/source_manifest.jsonl` 保存 URL、HTTP 状态、下载字节数、SHA-256、行数、覆盖范围和异常。分析使用 5 分钟完整 K 线；信号在 5 分钟结束后等待 1 分钟，以随后 1 分钟开盘价执行。`explore` 运行预先声明的入场、持仓和 PCA 因子消融，并输出参数、条件收益和 PCA 诊断结果。
+## 结果文件
 
-资金费使用官方 fundingRate 月度归档，实际结算费率和时间已保存；归档没有 markPrice，fapi 接口又在本机超时，所以交易表中的 funding 暂为未知项，净收益结论只能称为“未计 markPrice 资金费的毛/成本后结果”。
+- `REPORT_V2.md`：修正版中文报告与限制。
+- `results/v2_grid_2bp.csv`：29 个预先固定配置的完整网格。
+- `results/v2_selected_costs.csv`：一个验证期主配置与两个固定多标的对照，在 0—3 bp 成本下的验证/留出结果。
+- `results/v2_monthly_equity.csv`、`results/v2_by_target_2bp.csv`：逐月和逐标的贡献。
+- `results/v2_conditionals.csv`：按偏离幅度、方向和未来持有期的描述性条件收益。
+- `results/v2_trades_rank*_2bp.csv`、`results/v2_ledger_rank*_2bp.json`：逐笔交易与执行账本。
+- `results/funding_api/`：官方资金费率、结算时间和 markPrice；`results/funding_api_status.json` 保存抓取状态。
+
+结论是验证期的正结果没有在留出期延续，多标的 PEER/PCA 对照没有显示稳定的成本后优势。因此这些结果适合继续延长样本和预注册规则，不适合直接进入实盘。
