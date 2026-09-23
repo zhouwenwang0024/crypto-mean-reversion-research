@@ -1,0 +1,64 @@
+{
+  "original_symbol": "TONUSDT",
+  "replacement_symbol": "FILUSDT",
+  "reason": "TONUSDT has 10,979 zero-volume minutes in June and 100% zero-volume in July/August; OHLC remains 1.5901 and official funding archives are 404 for July/August.",
+  "selection_basis": {
+    "candidate_pool": [
+      "APTUSDT",
+      "ETCUSDT",
+      "ATOMUSDT",
+      "FILUSDT",
+      "INJUSDT"
+    ],
+    "forming_months": [
+      "2026-03",
+      "2026-04"
+    ],
+    "FILUSDT_quote_volume": 5888114675.875999,
+    "candidate_quote_volume_note": "FIL highest among candidates in forming months; all five had six monthly main-kline packages."
+  },
+  "final_symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT",
+    "DOGEUSDT",
+    "ADAUSDT",
+    "TRXUSDT",
+    "LINKUSDT",
+    "SUIUSDT",
+    "AVAXUSDT",
+    "LTCUSDT",
+    "BCHUSDT",
+    "DOTUSDT",
+    "HBARUSDT",
+    "XLMUSDT",
+    "FILUSDT",
+    "UNIUSDT",
+    "NEARUSDT",
+    "AAVEUSDT"
+  ],
+  "rows_per_symbol": {
+    "BTCUSDT": 264960,
+    "ETHUSDT": 264960,
+    "BNBUSDT": 264960,
+    "SOLUSDT": 264960,
+    "XRPUSDT": 264960,
+    "DOGEUSDT": 264960,
+    "ADAUSDT": 264960,
+    "TRXUSDT": 264960,
+    "LINKUSDT": 264960,
+    "SUIUSDT": 264960,
+    "AVAXUSDT": 264960,
+    "LTCUSDT": 264960,
+    "BCHUSDT": 264960,
+    "DOTUSDT": 264960,
+    "HBARUSDT": 264960,
+    "XLMUSDT": 264960,
+    "FILUSDT": 264960,
+    "UNIUSDT": 264960,
+    "NEARUSDT": 264960,
+    "AAVEUSDT": 264960
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "seconds": 31.508844137191772,
+  "results": [
+    {
+      "symbol": "BTCUSDT",
+      "status": "archive_rates_mark_price_missing",
+      "rows": 552,
+      "path": "data\\funding\\BTCUSDT.parquet",
+      "archive_errors": []
+    },
+    {
+      "symbol": "ETHUSDT",
+      "status": "archive_rates_mark_price_missing",
+      "rows": 552,
+      "path": "data\\funding\\ETHUSDT.parquet",
+      "archive_errors": []
+    },
+    {
+      "symbol": "BNBUSDT",
+      "status": "archive_rates_mark_price_missing",
+      "rows": 552,
+      "path": "data\\funding\\BNBUSDT.parquet",
+      "archive_errors": []
+    },
+    {
+      "symbol": "SOLUSDT",
+      "status": "archive_rates_mark_price_missing",
+      "rows": 552,
+      "path": "data\\funding\\SOLUSDT.parquet",
+      "archive_errors": []
+    },
+    {
+      "symbol": "XRPUSDT",
+      "status": "archive_rates_mark_price_missing",
+      "rows": 552,
+      "path": "data\\funding\\XRPUSDT.parquet",
+      "archive_errors": []
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "status": "archive_rates_mark_price_missing",
+      "rows": 552,
+      "path": "data\\funding\\DOGEUSDT.parquet",
+      "archive_errors": []
+    },
+    {
+      "symbol": "ADAUSDT",
+      "status": "archive_rates_mark_price_missing",
+      "rows": 552,
+      "path": "data\\funding\\ADAUSDT.parquet",
+      "archive_errors": []
+    },
+    {
+      "symbol": "TRXUSDT",
+      "status": "archive_rates_mark_price_missing",
+      "rows": 552,
+      "path": "data\\funding\\TRXUSDT.parquet",
+      "archive_errors": []
+    },
+    {
+      "symbol": "LINKUSDT",
+      "status": "archive_rates_mark_price_missing",
+      "rows": 552,
+      "path": "data\\funding\\LINKUSDT.parquet",
+      "archive_errors": []
+    },
+    {
+      "symbol": "SUIUSDT",
+      "status": "archive_rates_mark_price_missing",
+      "rows": 552,
+      "path": "data\\funding\\SUIUSDT.parquet",
+      "archive_errors": []
+    },
+    {
+      "symbol": "AVAXUSDT",
+      "status": "archive_rates_mark_price_missing",
+      "rows": 552,
+      "path": "data\\funding\\AVAXUSDT.parquet",
+      "archive_errors": []
+    },
+    {
+      "symbol": "LTCUSDT",
+      "status": "archive_rates_mark_price_missing",
+      "rows": 552,
+      "path": "data\\funding\\LTCUSDT.parquet",
+      "archive_errors": []
+    },
+    {
+      "symbol": "BCHUSDT",
+      "status": "archive_rates_mark_price_missing",
+      "rows": 552,
+      "path": "data\\funding\\BCHUSDT.parquet",
+      "archive_errors": []
+    },
+    {
+      "symbol": "DOTUSDT",
+      "status": "archive_rates_mark_price_missing",
+      "rows": 552,
+      "path": "data\\funding\\DOTUSDT.parquet",
+      "archive_errors": []
+    },
+    {
+      "symbol": "HBARUSDT",
+      "status": "archive_rates_mark_price_missing",
+      "rows": 552,
+      "path": "data\\funding\\HBARUSDT.parquet",
+      "archive_errors": []
+    },
+    {
+      "symbol": "XLMUSDT",
+      "status": "archive_rates_mark_price_missing",
+      "rows": 552,
+      "path": "data\\funding\\XLMUSDT.parquet",
+      "archive_errors": []
+    },
+    {
+      "symbol": "FILUSDT",
+      "status": "archive_rates_mark_price_missing",
+      "rows": 552,
+      "path": "data\\funding\\FILUSDT.parquet",
+      "archive_errors": []
+    },
+    {
+      "symbol": "UNIUSDT",
+      "status": "archive_rates_mark_price_missing",
+      "rows": 552,
+      "path": "data\\funding\\UNIUSDT.parquet",
+      "archive_errors": []
+    },
+    {
+      "symbol": "NEARUSDT",
+      "status": "archive_rates_mark_price_missing",
+      "rows": 552,
+      "path": "data\\funding\\NEARUSDT.parquet",
+      "archive_errors": []
+    },
+    {
+      "symbol": "AAVEUSDT",
+      "status": "archive_rates_mark_price_missing",
+      "rows": 552,
+      "path": "data\\funding\\AAVEUSDT.parquet",
+      "archive_errors": []
+    }
+  ]
+}

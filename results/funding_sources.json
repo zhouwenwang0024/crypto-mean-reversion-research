@@ -1,0 +1,734 @@
+[
+  {
+    "symbol": "BTCUSDT",
+    "month": "2026-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-03.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "month": "2026-04",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-04.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "month": "2026-05",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-05.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "month": "2026-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-06.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-07.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "BTCUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2026-08.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "ETHUSDT",
+    "month": "2026-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/ETHUSDT/ETHUSDT-fundingRate-2026-03.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "ETHUSDT",
+    "month": "2026-04",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/ETHUSDT/ETHUSDT-fundingRate-2026-04.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "ETHUSDT",
+    "month": "2026-05",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/ETHUSDT/ETHUSDT-fundingRate-2026-05.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "ETHUSDT",
+    "month": "2026-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/ETHUSDT/ETHUSDT-fundingRate-2026-06.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "ETHUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/ETHUSDT/ETHUSDT-fundingRate-2026-07.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "ETHUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/ETHUSDT/ETHUSDT-fundingRate-2026-08.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "BNBUSDT",
+    "month": "2026-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BNBUSDT/BNBUSDT-fundingRate-2026-03.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "BNBUSDT",
+    "month": "2026-04",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BNBUSDT/BNBUSDT-fundingRate-2026-04.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "BNBUSDT",
+    "month": "2026-05",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BNBUSDT/BNBUSDT-fundingRate-2026-05.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "BNBUSDT",
+    "month": "2026-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BNBUSDT/BNBUSDT-fundingRate-2026-06.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "BNBUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BNBUSDT/BNBUSDT-fundingRate-2026-07.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "BNBUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BNBUSDT/BNBUSDT-fundingRate-2026-08.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "SOLUSDT",
+    "month": "2026-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/SOLUSDT/SOLUSDT-fundingRate-2026-03.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "SOLUSDT",
+    "month": "2026-04",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/SOLUSDT/SOLUSDT-fundingRate-2026-04.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "SOLUSDT",
+    "month": "2026-05",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/SOLUSDT/SOLUSDT-fundingRate-2026-05.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "SOLUSDT",
+    "month": "2026-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/SOLUSDT/SOLUSDT-fundingRate-2026-06.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "SOLUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/SOLUSDT/SOLUSDT-fundingRate-2026-07.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "SOLUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/SOLUSDT/SOLUSDT-fundingRate-2026-08.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "XRPUSDT",
+    "month": "2026-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/XRPUSDT/XRPUSDT-fundingRate-2026-03.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "XRPUSDT",
+    "month": "2026-04",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/XRPUSDT/XRPUSDT-fundingRate-2026-04.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "XRPUSDT",
+    "month": "2026-05",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/XRPUSDT/XRPUSDT-fundingRate-2026-05.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "XRPUSDT",
+    "month": "2026-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/XRPUSDT/XRPUSDT-fundingRate-2026-06.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "XRPUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/XRPUSDT/XRPUSDT-fundingRate-2026-07.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "XRPUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/XRPUSDT/XRPUSDT-fundingRate-2026-08.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "DOGEUSDT",
+    "month": "2026-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/DOGEUSDT/DOGEUSDT-fundingRate-2026-03.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "DOGEUSDT",
+    "month": "2026-04",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/DOGEUSDT/DOGEUSDT-fundingRate-2026-04.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "DOGEUSDT",
+    "month": "2026-05",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/DOGEUSDT/DOGEUSDT-fundingRate-2026-05.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "DOGEUSDT",
+    "month": "2026-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/DOGEUSDT/DOGEUSDT-fundingRate-2026-06.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "DOGEUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/DOGEUSDT/DOGEUSDT-fundingRate-2026-07.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "DOGEUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/DOGEUSDT/DOGEUSDT-fundingRate-2026-08.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "ADAUSDT",
+    "month": "2026-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/ADAUSDT/ADAUSDT-fundingRate-2026-03.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "ADAUSDT",
+    "month": "2026-04",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/ADAUSDT/ADAUSDT-fundingRate-2026-04.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "ADAUSDT",
+    "month": "2026-05",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/ADAUSDT/ADAUSDT-fundingRate-2026-05.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "ADAUSDT",
+    "month": "2026-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/ADAUSDT/ADAUSDT-fundingRate-2026-06.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "ADAUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/ADAUSDT/ADAUSDT-fundingRate-2026-07.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "ADAUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/ADAUSDT/ADAUSDT-fundingRate-2026-08.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "TRXUSDT",
+    "month": "2026-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/TRXUSDT/TRXUSDT-fundingRate-2026-03.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "TRXUSDT",
+    "month": "2026-04",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/TRXUSDT/TRXUSDT-fundingRate-2026-04.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "TRXUSDT",
+    "month": "2026-05",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/TRXUSDT/TRXUSDT-fundingRate-2026-05.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "TRXUSDT",
+    "month": "2026-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/TRXUSDT/TRXUSDT-fundingRate-2026-06.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "TRXUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/TRXUSDT/TRXUSDT-fundingRate-2026-07.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "TRXUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/TRXUSDT/TRXUSDT-fundingRate-2026-08.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "LINKUSDT",
+    "month": "2026-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/LINKUSDT/LINKUSDT-fundingRate-2026-03.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "LINKUSDT",
+    "month": "2026-04",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/LINKUSDT/LINKUSDT-fundingRate-2026-04.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "LINKUSDT",
+    "month": "2026-05",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/LINKUSDT/LINKUSDT-fundingRate-2026-05.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "LINKUSDT",
+    "month": "2026-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/LINKUSDT/LINKUSDT-fundingRate-2026-06.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "LINKUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/LINKUSDT/LINKUSDT-fundingRate-2026-07.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "LINKUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/LINKUSDT/LINKUSDT-fundingRate-2026-08.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "SUIUSDT",
+    "month": "2026-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/SUIUSDT/SUIUSDT-fundingRate-2026-03.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "SUIUSDT",
+    "month": "2026-04",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/SUIUSDT/SUIUSDT-fundingRate-2026-04.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "SUIUSDT",
+    "month": "2026-05",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/SUIUSDT/SUIUSDT-fundingRate-2026-05.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "SUIUSDT",
+    "month": "2026-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/SUIUSDT/SUIUSDT-fundingRate-2026-06.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "SUIUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/SUIUSDT/SUIUSDT-fundingRate-2026-07.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "SUIUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/SUIUSDT/SUIUSDT-fundingRate-2026-08.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "AVAXUSDT",
+    "month": "2026-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/AVAXUSDT/AVAXUSDT-fundingRate-2026-03.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "AVAXUSDT",
+    "month": "2026-04",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/AVAXUSDT/AVAXUSDT-fundingRate-2026-04.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "AVAXUSDT",
+    "month": "2026-05",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/AVAXUSDT/AVAXUSDT-fundingRate-2026-05.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "AVAXUSDT",
+    "month": "2026-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/AVAXUSDT/AVAXUSDT-fundingRate-2026-06.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "AVAXUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/AVAXUSDT/AVAXUSDT-fundingRate-2026-07.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "AVAXUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/AVAXUSDT/AVAXUSDT-fundingRate-2026-08.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "LTCUSDT",
+    "month": "2026-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/LTCUSDT/LTCUSDT-fundingRate-2026-03.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "LTCUSDT",
+    "month": "2026-04",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/LTCUSDT/LTCUSDT-fundingRate-2026-04.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "LTCUSDT",
+    "month": "2026-05",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/LTCUSDT/LTCUSDT-fundingRate-2026-05.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "LTCUSDT",
+    "month": "2026-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/LTCUSDT/LTCUSDT-fundingRate-2026-06.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "LTCUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/LTCUSDT/LTCUSDT-fundingRate-2026-07.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "LTCUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/LTCUSDT/LTCUSDT-fundingRate-2026-08.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "BCHUSDT",
+    "month": "2026-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BCHUSDT/BCHUSDT-fundingRate-2026-03.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "BCHUSDT",
+    "month": "2026-04",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BCHUSDT/BCHUSDT-fundingRate-2026-04.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "BCHUSDT",
+    "month": "2026-05",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BCHUSDT/BCHUSDT-fundingRate-2026-05.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "BCHUSDT",
+    "month": "2026-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BCHUSDT/BCHUSDT-fundingRate-2026-06.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "BCHUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BCHUSDT/BCHUSDT-fundingRate-2026-07.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "BCHUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BCHUSDT/BCHUSDT-fundingRate-2026-08.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "DOTUSDT",
+    "month": "2026-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/DOTUSDT/DOTUSDT-fundingRate-2026-03.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "DOTUSDT",
+    "month": "2026-04",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/DOTUSDT/DOTUSDT-fundingRate-2026-04.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "DOTUSDT",
+    "month": "2026-05",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/DOTUSDT/DOTUSDT-fundingRate-2026-05.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "DOTUSDT",
+    "month": "2026-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/DOTUSDT/DOTUSDT-fundingRate-2026-06.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "DOTUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/DOTUSDT/DOTUSDT-fundingRate-2026-07.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "DOTUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/DOTUSDT/DOTUSDT-fundingRate-2026-08.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "HBARUSDT",
+    "month": "2026-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/HBARUSDT/HBARUSDT-fundingRate-2026-03.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "HBARUSDT",
+    "month": "2026-04",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/HBARUSDT/HBARUSDT-fundingRate-2026-04.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "HBARUSDT",
+    "month": "2026-05",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/HBARUSDT/HBARUSDT-fundingRate-2026-05.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "HBARUSDT",
+    "month": "2026-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/HBARUSDT/HBARUSDT-fundingRate-2026-06.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "HBARUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/HBARUSDT/HBARUSDT-fundingRate-2026-07.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "HBARUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/HBARUSDT/HBARUSDT-fundingRate-2026-08.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "XLMUSDT",
+    "month": "2026-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/XLMUSDT/XLMUSDT-fundingRate-2026-03.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "XLMUSDT",
+    "month": "2026-04",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/XLMUSDT/XLMUSDT-fundingRate-2026-04.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "XLMUSDT",
+    "month": "2026-05",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/XLMUSDT/XLMUSDT-fundingRate-2026-05.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "XLMUSDT",
+    "month": "2026-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/XLMUSDT/XLMUSDT-fundingRate-2026-06.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "XLMUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/XLMUSDT/XLMUSDT-fundingRate-2026-07.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "XLMUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/XLMUSDT/XLMUSDT-fundingRate-2026-08.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "FILUSDT",
+    "month": "2026-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/FILUSDT/FILUSDT-fundingRate-2026-03.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "FILUSDT",
+    "month": "2026-04",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/FILUSDT/FILUSDT-fundingRate-2026-04.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "FILUSDT",
+    "month": "2026-05",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/FILUSDT/FILUSDT-fundingRate-2026-05.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "FILUSDT",
+    "month": "2026-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/FILUSDT/FILUSDT-fundingRate-2026-06.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "FILUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/FILUSDT/FILUSDT-fundingRate-2026-07.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "FILUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/FILUSDT/FILUSDT-fundingRate-2026-08.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "UNIUSDT",
+    "month": "2026-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/UNIUSDT/UNIUSDT-fundingRate-2026-03.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "UNIUSDT",
+    "month": "2026-04",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/UNIUSDT/UNIUSDT-fundingRate-2026-04.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "UNIUSDT",
+    "month": "2026-05",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/UNIUSDT/UNIUSDT-fundingRate-2026-05.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "UNIUSDT",
+    "month": "2026-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/UNIUSDT/UNIUSDT-fundingRate-2026-06.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "UNIUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/UNIUSDT/UNIUSDT-fundingRate-2026-07.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "UNIUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/UNIUSDT/UNIUSDT-fundingRate-2026-08.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "NEARUSDT",
+    "month": "2026-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/NEARUSDT/NEARUSDT-fundingRate-2026-03.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "NEARUSDT",
+    "month": "2026-04",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/NEARUSDT/NEARUSDT-fundingRate-2026-04.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "NEARUSDT",
+    "month": "2026-05",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/NEARUSDT/NEARUSDT-fundingRate-2026-05.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "NEARUSDT",
+    "month": "2026-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/NEARUSDT/NEARUSDT-fundingRate-2026-06.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "NEARUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/NEARUSDT/NEARUSDT-fundingRate-2026-07.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "NEARUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/NEARUSDT/NEARUSDT-fundingRate-2026-08.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "AAVEUSDT",
+    "month": "2026-03",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/AAVEUSDT/AAVEUSDT-fundingRate-2026-03.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "AAVEUSDT",
+    "month": "2026-04",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/AAVEUSDT/AAVEUSDT-fundingRate-2026-04.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "AAVEUSDT",
+    "month": "2026-05",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/AAVEUSDT/AAVEUSDT-fundingRate-2026-05.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "AAVEUSDT",
+    "month": "2026-06",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/AAVEUSDT/AAVEUSDT-fundingRate-2026-06.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "AAVEUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/AAVEUSDT/AAVEUSDT-fundingRate-2026-07.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "AAVEUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/AAVEUSDT/AAVEUSDT-fundingRate-2026-08.zip",
+    "status": "archive_rate_only"
+  },
+  {
+    "symbol": "TONUSDT",
+    "month": "2026-07",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/TONUSDT/TONUSDT-fundingRate-2026-07.zip",
+    "status": "missing_404"
+  },
+  {
+    "symbol": "TONUSDT",
+    "month": "2026-08",
+    "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/TONUSDT/TONUSDT-fundingRate-2026-08.zip",
+    "status": "missing_404"
+  }
+]

@@ -1,0 +1,126 @@
+{
+  "symbols": {
+    "BTCUSDT": {
+      "rows": 264960,
+      "missing_minutes": 0,
+      "zero_volume_minutes": 0,
+      "issues": []
+    },
+    "ETHUSDT": {
+      "rows": 264960,
+      "missing_minutes": 0,
+      "zero_volume_minutes": 0,
+      "issues": []
+    },
+    "BNBUSDT": {
+      "rows": 264960,
+      "missing_minutes": 0,
+      "zero_volume_minutes": 0,
+      "issues": []
+    },
+    "SOLUSDT": {
+      "rows": 264960,
+      "missing_minutes": 0,
+      "zero_volume_minutes": 0,
+      "issues": []
+    },
+    "XRPUSDT": {
+      "rows": 264960,
+      "missing_minutes": 0,
+      "zero_volume_minutes": 0,
+      "issues": []
+    },
+    "DOGEUSDT": {
+      "rows": 264960,
+      "missing_minutes": 0,
+      "zero_volume_minutes": 0,
+      "issues": []
+    },
+    "ADAUSDT": {
+      "rows": 264960,
+      "missing_minutes": 0,
+      "zero_volume_minutes": 0,
+      "issues": []
+    },
+    "TRXUSDT": {
+      "rows": 264960,
+      "missing_minutes": 0,
+      "zero_volume_minutes": 0,
+      "issues": []
+    },
+    "LINKUSDT": {
+      "rows": 264960,
+      "missing_minutes": 0,
+      "zero_volume_minutes": 0,
+      "issues": []
+    },
+    "SUIUSDT": {
+      "rows": 264960,
+      "missing_minutes": 0,
+      "zero_volume_minutes": 0,
+      "issues": []
+    },
+    "AVAXUSDT": {
+      "rows": 264960,
+      "missing_minutes": 0,
+      "zero_volume_minutes": 0,
+      "issues": []
+    },
+    "LTCUSDT": {
+      "rows": 264960,
+      "missing_minutes": 0,
+      "zero_volume_minutes": 1,
+      "issues": []
+    },
+    "BCHUSDT": {
+      "rows": 264960,
+      "missing_minutes": 0,
+      "zero_volume_minutes": 0,
+      "issues": []
+    },
+    "DOTUSDT": {
+      "rows": 264960,
+      "missing_minutes": 0,
+      "zero_volume_minutes": 1,
+      "issues": []
+    },
+    "HBARUSDT": {
+      "rows": 264960,
+      "missing_minutes": 0,
+      "zero_volume_minutes": 2,
+      "issues": []
+    },
+    "XLMUSDT": {
+      "rows": 264960,
+      "missing_minutes": 0,
+      "zero_volume_minutes": 0,
+      "issues": []
+    },
+    "FILUSDT": {
+      "rows": 264960,
+      "missing_minutes": 0,
+      "zero_volume_minutes": 0,
+      "issues": []
+    },
+    "UNIUSDT": {
+      "rows": 264960,
+      "missing_minutes": 0,
+      "zero_volume_minutes": 0,
+      "issues": []
+    },
+    "NEARUSDT": {
+      "rows": 264960,
+      "missing_minutes": 0,
+      "zero_volume_minutes": 0,
+      "issues": []
+    },
+    "AAVEUSDT": {
+      "rows": 264960,
+      "missing_minutes": 0,
+      "zero_volume_minutes": 0,
+      "issues": []
+    }
+  },
+  "total_rows": 5299200,
+  "expected_rows": 5299200
+}

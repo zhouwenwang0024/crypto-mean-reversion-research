@@ -1,0 +1,44 @@
+{
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT",
+    "DOGEUSDT",
+    "ADAUSDT",
+    "TRXUSDT",
+    "LINKUSDT",
+    "SUIUSDT",
+    "AVAXUSDT",
+    "LTCUSDT",
+    "BCHUSDT",
+    "DOTUSDT",
+    "HBARUSDT",
+    "XLMUSDT",
+    "FILUSDT",
+    "UNIUSDT",
+    "NEARUSDT",
+    "AAVEUSDT"
+  ],
+  "rows_1m": 5299200,
+  "rows_5m": 1059840,
+  "index_start": "2026-03-01 00:00:00+00:00",
+  "index_end": "2026-08-31 23:55:00+00:00",
+  "models": [
+    "B0",
+    "B1",
+    "B2"
+  ],
+  "cost_bp": [
+    0,
+    2,
+    5,
+    7,
+    10
+  ],
+  "main_klines_zip_download_bytes": 186047601,
+  "funding_archive_download_bytes": 113653,
+  "data_disk_bytes": 214837965,
+  "results_disk_bytes": 16597739
+}
