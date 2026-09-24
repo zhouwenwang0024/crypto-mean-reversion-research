@@ -44,6 +44,7 @@ class Feature:
     close: pd.DataFrame
     level: pd.DataFrame
     hedge_by_day: dict[pd.Timestamp, np.ndarray]
+    neutralize: bool = True
 
 
 def load_prices() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
@@ -139,13 +140,13 @@ def peer_feature(close: pd.DataFrame, frequency: int) -> Feature:
     w = np.full((len(SYMBOLS), len(SYMBOLS)), -0.5 / (len(SYMBOLS) - 1))
     np.fill_diagonal(w, 0.5)
     days = {pd.Timestamp(d): w for d in close.index.normalize().unique()}
-    return Feature("PEER", frequency, close, level, days)
+    return Feature("PEER", frequency, close, level, days, True)
 
 
 def self_feature(close: pd.DataFrame, frequency: int) -> Feature:
     level = pd.DataFrame(np.log(close), index=close.index, columns=SYMBOLS)
     days = {pd.Timestamp(d): np.eye(len(SYMBOLS)) for d in close.index.normalize().unique()}
-    return Feature("B0", frequency, close, level, days)
+    return Feature("B0", frequency, close, level, days, False)
 
 
 def residual_feature(close: pd.DataFrame, frequency: int, model: str) -> Feature:
@@ -195,10 +196,11 @@ def residual_feature(close: pd.DataFrame, frequency: int, model: str) -> Feature
                 xn, yn = (x - xm) / xs, (y - ym) / ys
                 beta_n = np.linalg.solve(xn.T @ xn + 100.0 * np.eye(p - 1), xn.T @ yn)
                 beta = ys * beta_n / xs
+                alpha = ym - xm @ beta
                 hedge[i, i] = 1.0
                 hedge[i, peers] = -beta
                 cc = ret.iloc[pos_idx, peers].to_numpy()
-                residual[:, i] = ret.iloc[pos_idx, i].to_numpy() - cc @ beta
+                residual[:, i] = ret.iloc[pos_idx, i].to_numpy() - (alpha + cc @ beta)
         else:
             raise ValueError(model)
         hedge_by_day[day] = hedge
@@ -255,7 +257,10 @@ def backtest(feature: Feature, z: pd.DataFrame, open1: pd.DataFrame, close1: pd.
              entry: float, exit: float, hold_hours: int, cost_bp: float,
              max_positions: int = 3, allocation: float = 0.10,
              flat_boundaries: tuple[pd.Timestamp, ...] = (TRAIN_END, VALID_END),
-             funding_events: list[tuple[pd.Timestamp, np.ndarray, np.ndarray]] | None = None) -> tuple[pd.Series, pd.DataFrame, dict]:
+             funding_events: list[tuple[pd.Timestamp, np.ndarray, np.ndarray]] | None = None,
+             entry_mask: pd.DataFrame | None = None,
+             exit_rule: str = "band",
+             fee_mode: str = "net") -> tuple[pd.Series, pd.DataFrame, dict]:
     """Run a delayed-fill futures ledger; quantities are sized from known signal close."""
     close = feature.close
     frequency = feature.frequency
@@ -286,7 +291,14 @@ def backtest(feature: Feature, z: pd.DataFrame, open1: pd.DataFrame, close1: pd.
             signed = a["qty"] if a["kind"] == "entry" else -a["qty"]
             delta += signed
             gross_actions.append(float(np.abs(signed * px).sum()))
-        fee = net_turnover(delta, px) * cost_bp / 10000.0
+        net_fee = net_turnover(delta, px) * cost_bp / 10000.0
+        gross_fee = sum(gross_actions) * cost_bp / 10000.0
+        if fee_mode == "net":
+            fee = net_fee
+        elif fee_mode == "gross":
+            fee = gross_fee
+        else:
+            raise ValueError(f"unknown fee_mode={fee_mode}")
         gross_sum = sum(gross_actions) or 1.0
         cash -= fee
         for a, gross_action in zip(actions, gross_actions):
@@ -294,6 +306,7 @@ def backtest(feature: Feature, z: pd.DataFrame, open1: pd.DataFrame, close1: pd.
             alloc_fee = fee * gross_action / gross_sum
             if a["kind"] == "entry":
                 p["entry_px"] = px.copy(); p["entry_time"] = at; p["entry_fee"] = alloc_fee
+                p["actual_gross"] = gross_action
                 p["entry_turnover"] = gross_action
                 positions.append(p)
             else:
@@ -305,7 +318,8 @@ def backtest(feature: Feature, z: pd.DataFrame, open1: pd.DataFrame, close1: pd.
                     "id": p["id"], "model": feature.model, "frequency_min": frequency,
                     "target": p["target"], "signal_time": str(p["signal_time"]),
                     "entry_time": str(p["entry_time"]), "exit_time": str(at),
-                    "gross_target": p["gross"], "entry_turnover": p["entry_turnover"],
+                    "gross_target": p["gross"], "actual_gross": p.get("actual_gross", p["gross"]),
+                    "entry_turnover": p["entry_turnover"],
                     "exit_turnover": gross_action, "price_pnl": pnl,
                     "fee": p.get("entry_fee", 0.0) + alloc_fee,
                     "funding_cashflow": p.get("funding_cashflow", 0.0),
@@ -314,7 +328,9 @@ def backtest(feature: Feature, z: pd.DataFrame, open1: pd.DataFrame, close1: pd.
                     "hold_minutes": (at - p["entry_time"]).total_seconds() / 60.0,
                     "z_entry": p["z_entry"], "reason": a.get("reason", "exit"),
                 })
-        ledger.append({"time": str(at), "status": "filled", "turnover": net_turnover(delta, px), "fee": fee, "cash": cash})
+        ledger.append({"time": str(at), "status": "filled", "turnover": net_turnover(delta, px),
+                       "gross_turnover": sum(gross_actions), "fee": fee,
+                       "net_fee": net_fee, "gross_fee": gross_fee, "cash": cash})
 
     def apply_funding(up_to: pd.Timestamp) -> None:
         nonlocal funding_idx, cash, funding_cash
@@ -337,6 +353,10 @@ def backtest(feature: Feature, z: pd.DataFrame, open1: pd.DataFrame, close1: pd.
                 cut = boundary - pd.Timedelta(minutes=1)
                 apply_funding(cut)
                 execute(cut, [{"kind": "exit", "qty": p["qty"], "position": p, "reason": "period_boundary"} for p in list(positions)], forced=True)
+                # Record the forced close at its actual cutoff so the prior
+                # period includes its PnL and fee; repeat the same cash at the
+                # boundary as the next period's starting equity.
+                equity_rows.append((cut, cash))
                 equity_rows.append((boundary, cash))
                 flattened.add(boundary)
         due = [t for t in pending if t <= now]
@@ -354,11 +374,21 @@ def backtest(feature: Feature, z: pd.DataFrame, open1: pd.DataFrame, close1: pd.
             j = SYMBOLS.index(p["target"])
             age = (now - p["entry_time"]).total_seconds() / 3600.0
             pnl = float(np.dot(p["qty"], mark - p["entry_px"]))
-            trigger = np.isfinite(zrow[j]) and (abs(zrow[j]) <= exit)
-            trigger = trigger or age >= hold_hours or pnl / max(p["gross"], 1.0) <= -0.03
+            stop_trigger = pnl / max(p.get("actual_gross", p["gross"]), 1.0) <= -0.03
+            timeout_trigger = age >= hold_hours
+            if exit_rule == "band":
+                mean_trigger = np.isfinite(zrow[j]) and (abs(zrow[j]) <= exit)
+            elif exit_rule == "zero_cross":
+                mean_trigger = np.isfinite(zrow[j]) and p["side"] * zrow[j] <= 0
+            elif exit_rule == "time_only":
+                mean_trigger = False
+            else:
+                raise ValueError(f"unknown exit_rule={exit_rule}")
+            trigger = mean_trigger or timeout_trigger or stop_trigger
             if trigger and not p.get("pending_exit"):
                 p["pending_exit"] = True
-                pending.setdefault(now + pd.Timedelta(minutes=2), []).append({"kind": "exit", "qty": p["qty"], "position": p, "reason": "mean" if abs(zrow[j]) <= exit else ("stop" if pnl / max(p["gross"], 1.0) <= -0.03 else "timeout")})
+                reason = "stop" if stop_trigger else ("timeout" if timeout_trigger else ("zero_cross" if exit_rule == "zero_cross" else "mean"))
+                pending.setdefault(now + pd.Timedelta(minutes=2), []).append({"kind": "exit", "qty": p["qty"], "position": p, "reason": reason})
         reserved = {p["target"] for p in positions} | {a["position"]["target"] for v in pending.values() for a in v if a["kind"] == "entry"}
         for j in np.argsort(-np.nan_to_num(np.abs(zrow), nan=-np.inf)):
             if len(positions) + sum(a["kind"] == "entry" for v in pending.values() for a in v) >= max_positions:
@@ -367,13 +397,16 @@ def backtest(feature: Feature, z: pd.DataFrame, open1: pd.DataFrame, close1: pd.
                 continue
             if abs(float(zrow[j])) < entry:
                 continue
+            if entry_mask is not None and not bool(entry_mask.loc[start, SYMBOLS[j]]):
+                continue
             hedge = feature.hedge_by_day.get(pd.Timestamp(start.normalize()))
             if hedge is None:
                 continue
             px_signal = mark
             eq = _equity(cash, positions, mark)
             gross = max(0.0, eq * allocation)
-            w = signed_weights(float(zrow[j]), hedge[j], neutralize=feature.model != "B0")
+            w = signed_weights(float(zrow[j]), hedge[j],
+                               neutralize=feature.neutralize and feature.model not in {"B0", "AR1"})
             qty = gross * w / px_signal
             if not np.isfinite(qty).all() or np.abs(qty).sum() == 0:
                 continue
@@ -389,8 +422,11 @@ def backtest(feature: Feature, z: pd.DataFrame, open1: pd.DataFrame, close1: pd.
             qty *= max(0.0, min(1.0, alpha))
             if np.abs(qty).sum() == 0:
                 continue
+            actual_gross = float(np.abs(qty * px_signal).sum())
             p = {"id": next_id, "target": SYMBOLS[j], "qty": qty, "entry_px": None, "entry_time": None,
-                 "signal_time": now, "gross": gross, "entry_turnover": float(np.abs(qty * px_signal).sum()), "z_entry": float(zrow[j])}
+                 "signal_time": now, "gross": gross, "actual_gross": actual_gross,
+                 "entry_turnover": actual_gross,
+                 "z_entry": float(zrow[j]), "side": float(np.sign(zrow[j]))}
             next_id += 1; reserved.add(SYMBOLS[j])
             pending.setdefault(now + pd.Timedelta(minutes=2), []).append({"kind": "entry", "qty": qty, "position": p})
         
@@ -410,14 +446,19 @@ def metrics(eq: pd.Series, trades: pd.DataFrame, start: pd.Timestamp, end: pd.Ti
     x = eq[(eq.index >= start) & (eq.index < end)]
     if x.empty:
         return {"return": np.nan, "max_drawdown": np.nan, "trades": 0}
-    daily = x.resample("1D").last().pct_change().dropna()
-    peak = x.cummax(); dd = x / peak - 1
+    previous = eq[eq.index < start]
+    base = float(previous.iloc[-1]) if len(previous) else INITIAL
+    daily_end = x.resample("1D").last().dropna()
+    prior_day = daily_end.shift(1)
+    prior_day.iloc[0] = base
+    daily = daily_end / prior_day - 1.0
+    peak = x.cummax().clip(lower=base); dd = x / peak - 1
     t = trades[(pd.to_datetime(trades.exit_time, utc=True) >= start) & (pd.to_datetime(trades.exit_time, utc=True) < end)] if len(trades) else trades
     turnover = float(t.entry_turnover.add(t.exit_turnover).sum()) if len(t) else 0.0
     gross = float(t.price_pnl.sum()) if len(t) else 0.0
     funding = sum(float(x["cashflow"]) for x in (funding_rows or []) if start <= pd.Timestamp(x["time"]) < end)
     return {
-        "return": float(x.iloc[-1] / x.iloc[0] - 1), "end_equity": float(x.iloc[-1]),
+        "return": float(x.iloc[-1] / base - 1), "start_equity": base, "end_equity": float(x.iloc[-1]),
         "max_drawdown": float(dd.min()), "sharpe_daily": float(daily.mean() / daily.std(ddof=1) * math.sqrt(365)) if len(daily) > 1 and daily.std(ddof=1) > 0 else np.nan,
         "trades": int(len(t)), "win_rate": float((t.net_pnl > 0).mean()) if len(t) else np.nan,
         "profit_factor": float(t.loc[t.net_pnl > 0, "net_pnl"].sum() / -t.loc[t.net_pnl < 0, "net_pnl"].sum()) if len(t) and (t.net_pnl < 0).any() else np.nan,

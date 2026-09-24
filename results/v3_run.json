@@ -1,0 +1,32 @@
+{
+  "grid_rows": 67,
+  "selected_configs": 10,
+  "selected_cost_rows": 80,
+  "models": [
+    "AR1",
+    "B0",
+    "MEDIAN",
+    "PCA1",
+    "PCA3",
+    "PCA5",
+    "PEER",
+    "RIDGE"
+  ],
+  "frequencies_min": [
+    5,
+    15,
+    60
+  ],
+  "costs_bp": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "fee_mode": "gross action turnover for primary v3 results",
+  "selection": "fixed 15m controls plus five May-June leaders; July-August reused after prior v2/v3 inspection, not an untouched holdout",
+  "confirmation_status": "retrospective exploratory; independent new data required",
+  "train": "2026-03-01/2026-05-01",
+  "validation": "2026-05-01/2026-07-01",
+  "holdout": "2026-07-01/2026-09-01"
+}

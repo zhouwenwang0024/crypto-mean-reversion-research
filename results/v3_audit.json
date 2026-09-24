@@ -1,0 +1,72 @@
+{
+  "grid_rows": 67,
+  "selected_accounts": 10,
+  "cost_rows": 80,
+  "daily_period_days": {
+    "valid": 61,
+    "holdout": 62
+  },
+  "accounts": [
+    {
+      "rank": 1,
+      "model": "B0",
+      "reconciliation_error": 6.093614501878619e-11
+    },
+    {
+      "rank": 2,
+      "model": "PEER",
+      "reconciliation_error": -5.711626727133989e-10
+    },
+    {
+      "rank": 3,
+      "model": "MEDIAN",
+      "reconciliation_error": -1.3278622645884752e-10
+    },
+    {
+      "rank": 4,
+      "model": "RIDGE",
+      "reconciliation_error": 4.838511813431978e-10
+    },
+    {
+      "rank": 5,
+      "model": "PCA3",
+      "reconciliation_error": -2.346496330574155e-10
+    },
+    {
+      "rank": 6,
+      "model": "B0",
+      "reconciliation_error": -2.0736479200422764e-10
+    },
+    {
+      "rank": 7,
+      "model": "AR1",
+      "reconciliation_error": 2.8467184165492654e-10
+    },
+    {
+      "rank": 8,
+      "model": "AR1",
+      "reconciliation_error": -5.4569682106375694e-12
+    },
+    {
+      "rank": 9,
+      "model": "B0",
+      "reconciliation_error": -1.0049916454590857e-10
+    },
+    {
+      "rank": 10,
+      "model": "B0",
+      "reconciliation_error": 4.170033207628876e-10
+    }
+  ],
+  "all_cost_curves_nonincreasing": true,
+  "confirmation_status": "reused evaluation sample; no untouched holdout claim",
+  "sha256": {
+    "src\\research_v2.py": "ecb7013c24ff46c07bd93d877551e34d26d4d9bb29f1735f7f3a6d290b4f7eef",
+    "src\\research_v3.py": "7c7bbb3fcd3e3c6e4662c36bd841c0b837110782b973238111148adc566ecbf7",
+    "src\\summarize_v3.py": "2f5d03af28674006d094cde5ec979dc2809a6dd8fdb4891a9b18b530577181df",
+    "src\\verify_v3.py": "40fe2fe91a2f95251ad6972138eecc99d390f684853eaeae71f31b5499062647",
+    "results\\v3_experiment_manifest.json": "8f0db80c447baf1bcb03467238aa807d7101a903f38bee440ae2277566ec98f9",
+    "results\\v3_grid_2bp.csv": "4ad58f26976b42cb17fd91b10b69f1a743f0ed230bc347217cf30f0254b14cb4",
+    "results\\v3_selected_costs.csv": "373166fda11cd44bf28432664c96aef297dc4e3a0e062fc691dca03f99db5f6d"
+  }
+}
