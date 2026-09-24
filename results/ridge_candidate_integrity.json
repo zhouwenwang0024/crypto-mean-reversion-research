@@ -1,0 +1,66 @@
+{
+  "variants": [
+    {
+      "variant": "raw_centered_0bp_funding",
+      "trades": 1456,
+      "fees": 0.0
+    },
+    {
+      "variant": "raw_centered_0bp_nofunding",
+      "trades": 1457,
+      "fees": 0.0
+    },
+    {
+      "variant": "raw_centered_5bp_funding",
+      "trades": 1458,
+      "fees": 42162.98624735089
+    },
+    {
+      "variant": "raw_centered_5bp_nofunding",
+      "trades": 1458,
+      "fees": 42107.12126058641
+    },
+    {
+      "variant": "raw_uncentered_0bp_funding",
+      "trades": 1456,
+      "fees": 0.0
+    },
+    {
+      "variant": "raw_uncentered_0bp_nofunding",
+      "trades": 1457,
+      "fees": 0.0
+    },
+    {
+      "variant": "raw_uncentered_5bp_funding",
+      "trades": 1458,
+      "fees": 42162.98624735089
+    },
+    {
+      "variant": "raw_uncentered_5bp_nofunding",
+      "trades": 1458,
+      "fees": 42107.12126058641
+    },
+    {
+      "variant": "scaled_0bp_funding",
+      "trades": 387,
+      "fees": 0.0
+    },
+    {
+      "variant": "scaled_0bp_nofunding",
+      "trades": 387,
+      "fees": 0.0
+    },
+    {
+      "variant": "scaled_5bp_funding",
+      "trades": 387,
+      "fees": 11415.877135913353
+    },
+    {
+      "variant": "scaled_5bp_nofunding",
+      "trades": 387,
+      "fees": 11415.559953291173
+    }
+  ],
+  "errors": [],
+  "ok": true
+}

@@ -1,0 +1,129 @@
+{
+  "config": {
+    "fit_hours": 672,
+    "signal_minutes": 5,
+    "center_minutes": 180,
+    "scale_hours": 672,
+    "entry_sigma": 2.0,
+    "entry_pct": 0.015,
+    "repair_fraction": 0.5,
+    "max_hold_hours": 4.0,
+    "stop_pct": 0.03,
+    "max_positions": 3,
+    "allocation": 0.3,
+    "max_new_budget": 0.9,
+    "fill_delay_minutes": 1,
+    "ridge_alpha": 100.0,
+    "fee_modes": [
+      0.0,
+      5.0
+    ]
+  },
+  "bundle_present": false,
+  "variants": [
+    {
+      "variant": "scaled_0bp_nofunding",
+      "scaled": true,
+      "cost_bp": 0.0,
+      "with_funding": false,
+      "final_equity": 99327.92691270188,
+      "return": -0.006720730872981195,
+      "max_drawdown": -0.01877476196232908,
+      "trades": 1370,
+      "fees": 0.0,
+      "gross_price_pnl": -672.0730872982307,
+      "funding_cash": 0.0
+    },
+    {
+      "variant": "scaled_0bp_funding",
+      "scaled": true,
+      "cost_bp": 0.0,
+      "with_funding": true,
+      "final_equity": 99327.92691270188,
+      "return": -0.006720730872981195,
+      "max_drawdown": -0.01877476196232908,
+      "trades": 1370,
+      "fees": 0.0,
+      "gross_price_pnl": -672.0730872982307,
+      "funding_cash": 0.0
+    },
+    {
+      "variant": "scaled_5bp_nofunding",
+      "scaled": true,
+      "cost_bp": 5.0,
+      "with_funding": false,
+      "final_equity": 65174.26691975989,
+      "return": -0.34825733080240107,
+      "max_drawdown": -0.3487788252162668,
+      "trades": 1370,
+      "fees": 33759.351482896076,
+      "gross_price_pnl": -1066.3815973435555,
+      "funding_cash": 0.0
+    },
+    {
+      "variant": "scaled_5bp_funding",
+      "scaled": true,
+      "cost_bp": 5.0,
+      "with_funding": true,
+      "final_equity": 65174.26691975989,
+      "return": -0.34825733080240107,
+      "max_drawdown": -0.3487788252162668,
+      "trades": 1370,
+      "fees": 33759.351482896076,
+      "gross_price_pnl": -1066.3815973435555,
+      "funding_cash": 0.0
+    },
+    {
+      "variant": "raw_0bp_nofunding",
+      "scaled": false,
+      "cost_bp": 0.0,
+      "with_funding": false,
+      "final_equity": 101856.44418736438,
+      "return": 0.0185644418736437,
+      "max_drawdown": -0.09171185799961323,
+      "trades": 2775,
+      "fees": 0.0,
+      "gross_price_pnl": 1856.4441873644355,
+      "funding_cash": 0.0
+    },
+    {
+      "variant": "raw_0bp_funding",
+      "scaled": false,
+      "cost_bp": 0.0,
+      "with_funding": true,
+      "final_equity": 101877.04090792059,
+      "return": 0.018770409079205796,
+      "max_drawdown": -0.09153491906770028,
+      "trades": 2775,
+      "fees": 0.0,
+      "gross_price_pnl": 1857.146893957819,
+      "funding_cash": 19.894013962582832
+    },
+    {
+      "variant": "raw_5bp_nofunding",
+      "scaled": false,
+      "cost_bp": 5.0,
+      "with_funding": false,
+      "final_equity": 45009.261880177546,
+      "return": -0.5499073811982245,
+      "max_drawdown": -0.5514708299246738,
+      "trades": 2772,
+      "fees": 56491.77171715399,
+      "gross_price_pnl": 1501.0335973317328,
+      "funding_cash": 0.0
+    },
+    {
+      "variant": "raw_5bp_funding",
+      "scaled": false,
+      "cost_bp": 5.0,
+      "with_funding": true,
+      "final_equity": 44455.51703716468,
+      "return": -0.5554448296283532,
+      "max_drawdown": -0.5569890433877438,
+      "trades": 2772,
+      "fees": 56280.51880403921,
+      "gross_price_pnl": 715.731293720796,
+      "funding_cash": 20.304547483540933
+    }
+  ]
+}

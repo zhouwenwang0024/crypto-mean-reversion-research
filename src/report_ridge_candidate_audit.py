@@ -1,0 +1,93 @@
+"""Render the committed Ridge candidate audit report from current artifacts."""
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parents[1]
+RESULTS = ROOT / "results"
+
+
+def pct(x: float) -> str:
+    return f"{x * 100:.2f}%"
+
+
+def table_rows(audit: dict, periods: pd.DataFrame) -> str:
+    rows = []
+    for v in audit["variants"]:
+        if v["variant"].endswith(("0bp_nofunding", "5bp_nofunding")) and v["variant"].startswith(("scaled", "raw_centered")):
+            p = periods[periods.variant == v["variant"] + "_equity"].iloc[0]
+            rows.append(f"| {v['variant']} | {pct(p.may_jun)} | {pct(p.jul_aug)} | {pct(v['return'])} | {pct(v['max_drawdown'])} | {v['trades']} | {v['fees']:.0f} |")
+    return "\n".join(rows)
+
+
+def main() -> None:
+    audit = json.loads((RESULTS / "ridge_candidate_audit.json").read_text(encoding="utf-8"))
+    periods = pd.read_csv(RESULTS / "ridge_candidate_periods.csv")
+    pre = json.loads((RESULTS / "ridge_candidate_pre_fix_audit.json").read_text(encoding="utf-8"))
+    scale = json.loads((RESULTS / "ridge_scale_diagnostics.json").read_text(encoding="utf-8"))
+    raw = next(x for x in audit["variants"] if x["variant"] == "raw_centered_0bp_nofunding")
+    raw5 = next(x for x in audit["variants"] if x["variant"] == "raw_centered_5bp_nofunding")
+    scaled = next(x for x in audit["variants"] if x["variant"] == "scaled_0bp_nofunding")
+    raw_pre = next(x for x in pre["variants"] if x["variant"] == "raw_0bp_nofunding")
+    raw_trades = pd.read_csv(RESULTS / "ridge_candidate_raw_centered_0bp_nofunding_trades.csv")
+    turnover = (raw_trades.notional + raw_trades.notional * raw_trades.exit_price / raw_trades.entry_price).sum()
+    breakeven = raw_trades.gross_price_pnl.sum() / turnover * 10000
+    report = f'''# Ridge 候选策略独立复核
+
+## 复核边界
+
+`ridge_candidate_review_bundle.zip` 不在当前 base、Git 远端、`D:\\mean-return` 或用户目录中，仓库的 `.gitignore` 也没有忽略它。因此无法声称复现压缩包内的原程序和精确时序。本报告的数字来自 `src/audit_ridge_candidate.py` 对消息中书面规格的独立实现；包补入后应再做一次逐项复现。
+
+本地使用已有的 20 个最终标的和 2026-03-01 至 2026-09-01 的 1 分钟 Parquet，没有下载。当前池用 FILUSDT 替代 TONUSDT：TON 在 7、8 月是零成交静止数据，替换依据保存在 `results/universe_replacement.json`。这已经是与候选包可能不同的第一个数据条件。
+
+## 实现口径
+
+每个 UTC 日用之前完整的 672 个小时收益拟合目标币对其余 19 币的 Ridge，带截距；分钟信号使用 5 分钟柱结束价。相对序列为
+
+`s_i(t) = log(P_i(t)) - beta_i · log(P_peer(t))`。
+
+中枢是此前 3 小时、滞后一根完整 5 分钟柱的均值；σ 是此前 28 天 5 分钟残差的样本标准差，也滞后一根柱。入场要求 `|z| >= 2` 且 `|exp(residual)-1| >= 1.5%`，信号结束后下一分钟开盘成交。持仓只包含目标币，按成交前权益的 30% 建仓，最多三仓、总新建预算 90%。入场 beta 和中枢冻结；残差向零修复 50% 退出，4 小时超时，目标币实际价格逆向 3% 止损；同一偏离在残差换符号前不重开。
+
+0 bp/5 bp 是单边每次实际目标币名义额的费用，入场和出场都计费。资金费使用本地 API 缓存中的结算标记价，现金流为 `-side * notional / entry_price * mark_price * funding_rate`。
+
+## 复现结果
+
+用户给出的参考数是：5—6 月 `+38.76% / +20.55%`（0/5 bp），7—8 月 `+17.26% / +4.55%`。下表是连续 3—8 月运行后按权益边界切片的结果；7 月 1 日没有强制清仓，因此它不是两个独立重新启动的回测。
+
+| 口径 | 5—6 月 0 bp | 7—8 月 0 bp | 全期 0 bp | 全期最大回撤 | 交易数 | 5 bp 费用 |
+|---|---:|---:|---:|---:|---:|---:|
+{table_rows(audit, periods)}
+
+标准化 Ridge 的全期 0 bp 收益为 {pct(scaled['return'])}、最大回撤 {pct(scaled['max_drawdown'])}；标准带截距但未标准化的 Ridge 为 {pct(raw['return'])}、最大回撤 {pct(raw['max_drawdown'])}。同一未标准化口径在 5 bp 下变为 {pct(raw5['return'])}，最大回撤 {pct(raw5['max_drawdown'])}。其价格损益的静态盈亏平衡单边费率约为 {breakeven:.2f} bp，但 5 bp 的实际复利结果已经为负。
+
+与给定参考数相比，最终未标准化、无资金费的分段结果为约 `+31.25% / +10.67%`，不能复现 `+38.76% / +17.26%`；加入资金费后为约 `+30.01% / +10.61%`。差异不能归因于资金费，必须来自缺失包中的模型、池、中心、σ、时序或交易细节。没有调参去逼近参考数字。
+
+## 审查发现和反例
+
+1. Ridge 尺度是决定性口径。28 天样本内 3,100 个目标日的 beta 范数中位数：标准化 `{scale['scaled']['median']:.4f}`，未标准化 `{scale['raw_centered']['median']:.7f}`；未标准化惩罚几乎把 peer beta 压到零，收益更接近单币均值回归，而不是 19 币统计套利。中心化和未中心化的未标准化结果在本样本几乎相同，但两者已分别实现并留档。
+2. 修复前的 50% 退出判断符号相反：偏离扩大时会退出，真正向零修复时反而不退出。可复核反例是 ETHUSDT 2026-04-27 05:19 UTC，入场残差 -0.01909、z=-3.3927；05:20 成交后残差扩大到 -0.02261，旧判断在 05:25 以 -122.20 退出。修正后该仓到 09:25 超时退出，价格损益 -378.65。修复前汇总与证据见 `ridge_candidate_pre_fix_*`。
+3. 初版退出使用每日更新的 beta，没有冻结入场系数；最终版本在持仓中保存 beta，并用当前价格重新计算冻结残差。
+4. 初版把 5 分钟左标签当作可成交时刻，可能在柱结束前成交；最终版本明确 `[10:00,10:05)` 在 10:04 检查、10:05 开盘成交。成交后权益用成交分钟收盘标记，样本外延迟订单不再错误回填样本开头价格。由于只在 5 分钟检查，实际成交持仓最长可比 4 小时多约 5 分钟；这是观察频率和成交延迟造成的边界容差，不能写成精确 4 小时。
+5. 目标币单腿使策略暴露于方向性价格风险。最终未标准化 0 bp 的全期回撤约 {pct(raw['max_drawdown'])}；5 bp 后为 {pct(raw5['max_drawdown'])}，这不是低风险市场中性收益。
+
+## 结论
+
+不能确认压缩包策略已经复现，因为包缺失；按书面规则的独立重建也不能得到给定参考结果。即使采用未标准化 Ridge，5 bp 后全期收益为负，标准化 Ridge 在 0 bp 也只有 {pct(scaled['return'])}，5 bp 为负。因此这套候选不值得直接部署。下一步应先取得压缩包，锁定其标的池、Ridge 预处理、3 小时中枢和 σ 窗口、成交延迟及边界处理，再做独立重现；在此之前不应把参考数字当作已验证业绩。
+
+可重跑：
+
+```powershell
+python src\\audit_ridge_candidate.py
+python src\\report_ridge_candidate_audit.py
+python -m pytest -p no:pytest_anchorpy -p no:anyio -p no:requests_mock -p no:pytest_ethereum --assert=plain -q tests
+```
+'''
+    (ROOT / "REPORT_RIDGE_CANDIDATE_AUDIT.md").write_text(report, encoding="utf-8")
+    print("wrote REPORT_RIDGE_CANDIDATE_AUDIT.md")
+
+
+if __name__ == "__main__":
+    main()
