@@ -1,5 +1,7 @@
 data/
 results/*.parquet
+results/new_reversal_events.csv
+results/new_cross_sectional_events.csv
 tmp/
 *.part
 __pycache__/

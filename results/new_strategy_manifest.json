@@ -1,0 +1,31 @@
+{
+  "sources": [
+    "https://arxiv.org/abs/2608.21888",
+    "https://github.com/nadav2/short-horizon-reversion",
+    "https://arxiv.org/abs/1903.06033",
+    "https://arxiv.org/abs/2109.10662",
+    "https://ieeexplore.ieee.org/document/9200323/",
+    "https://github.com/Stermer72/pairs-trading",
+    "https://doi.org/10.1002/fut.22425"
+  ],
+  "assumptions": {
+    "signal": "completed bar or funding settlement; next 15m bar open",
+    "horizons_min": [
+      15,
+      30,
+      60,
+      240
+    ],
+    "fees": [
+      0.0,
+      0.5,
+      1.0,
+      2.0,
+      3.0,
+      5.0
+    ],
+    "funding": "previous settlement rank; next settlement cash flow, funding is a basis proxy",
+    "pair_formation": "Mar-Apr 2026 fixed before May-June/July-August",
+    "pair_z_bars": 2688
+  }
+}
