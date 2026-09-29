@@ -1,0 +1,26 @@
+{
+  "dev_max_error": 1.9637069748057456e-15,
+  "center_max_error": 1.7119639039719914e-13,
+  "scale_max_error": 1.457167719820518e-16,
+  "W_max_error": 6.800116025829084e-15,
+  "pass": true,
+  "account": {
+    "equity_max_error": 8.881784197001252e-15,
+    "quantity_max_error": 0.0,
+    "pass": true
+  },
+  "mutants": {
+    "reverse_quantity_rejected": true,
+    "omitted_fee_rejected": true
+  },
+  "causal": {
+    "feature_prefix_max_error": 0.0,
+    "scale_prefix_max_error": 0.0,
+    "weights_prefix_max_error": 0.0,
+    "account_prefix_max_error": 0.0,
+    "tape_prefix_max_error": 0.0,
+    "future_equity_change": 1.7560268797271694,
+    "pass": true
+  },
+  "all_pass": true
+}

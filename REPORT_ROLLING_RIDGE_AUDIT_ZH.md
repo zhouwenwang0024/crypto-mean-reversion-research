@@ -33,6 +33,8 @@
 
 因果和合约测试实际调用引擎函数：未来后缀扰动在 2026-05-21 12:00、2026-07-15 00:00 之前的 dev、W、权益、数量误差均为 0，扰动后续权益分别改变 0.3421、0.5980；原始引擎的报价单位不变性最大权益误差为 `9.25e-4`，容差修正后为 `7.33e-15`。15 项核心测试全部通过，包含方向、动态退出、成交时序、240 分钟期限、费用、未来价格隔离和独立账本。故意反转方向、漏扣费用、使用未来价格定量三个反例均被捕获，汇总见 [`results/contract_checks_local.json`](results/contract_checks_local.json) 与 [`results/tests6_initial.json`](results/tests6_initial.json)。
 
+默认 pytest 收集会触发环境中旧版 `anchorpy` assertion hook 的兼容性错误；按仓库命令禁用这些插件并使用 `--assert=plain` 后，`tests/test_ridge_candidate_audit.py` 的 5 项和 `tests/test_research_v3.py` 的 7 项均通过。
+
 ## 资金费与成本承受力
 
 `results/funding_api` 有 20 币、11040 条结算记录，rate 和 mark 均为有限值；资金费没有默认为零。使用官方 mark 重放修正版 Ridge、5 bp：5–6 月收益 `19.403141%`，资金现金流 `+0.050837%`；7–8 月收益 `10.759438%`，资金现金流 `+0.068443%`。结果在 [`results/funding_replay.csv`](results/funding_replay.csv)。这仍是分钟级成交代理，未模拟真实队列、深度、滑点或清算。
@@ -55,3 +57,8 @@ Ridge 惩罚邻近值 0.05、0.1、0.2 的严格引擎比较在 [`results/ridge_
 ## 结论与限制
 
 原候选可以在本地数据上复现，且独立 beta、参考价和现金数量账本一致。需要修正的是真实数值边界和缓存身份，而非方向、跨日坐标、未来信息、订单数量或动态退出主逻辑。修正后策略在 5 bp 成本下两段历史仍为正，但 10 bp 的 7–8 月为负，回撤约 8.6%–16.1%，收益和风险集中于少数币。PCA5 提供了较稳定的历史对照，尚不足以证明更强的未见样本外表现。下一次真正的新区间评估前应冻结模型、币池、门槛、费用和成交延迟；本报告没有把已经反复研究的 7–8 月称为新样本外。
+
+
+---
+
+Two-year native-minute validation, six-model comparison, and independent ledger audit: [`REPORT_EXTENDED_VALIDATION_ZH.md`](REPORT_EXTENDED_VALIDATION_ZH.md).

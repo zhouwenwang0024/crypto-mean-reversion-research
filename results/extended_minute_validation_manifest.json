@@ -1,0 +1,45 @@
+{
+  "source": "data/extended_1m, native 1m execution",
+  "data_digest": "fbb24c49342aad0928626200067cf8e28742360138cdf65b6de3928486024789",
+  "new_sample": "2024-03-01/2026-03-01",
+  "warmup": "2024-01/2024-02",
+  "periods": {
+    "development": [
+      "2024-03-01",
+      "2025-03-01"
+    ],
+    "validation": [
+      "2025-03-01",
+      "2025-09-01"
+    ],
+    "holdout": [
+      "2025-09-01",
+      "2026-03-01"
+    ]
+  },
+  "models": [
+    "ridge_sma3",
+    "pca2_sma3",
+    "pca3_sma3",
+    "pca5_sma3",
+    "ridge_recent_hourly",
+    "ridge_huber"
+  ],
+  "cost_bp": [
+    0,
+    2,
+    5,
+    10
+  ],
+  "observation_minutes": 5,
+  "centre_minutes": 180,
+  "fit_days": 28,
+  "scale_days": 7,
+  "entry_z": 2.0,
+  "entry_gap": 0.015,
+  "exit_gap": 0.0025,
+  "max_hold_minutes": 240,
+  "stop_fraction": 0.03,
+  "funding_rows": 45540,
+  "selection": "frozen before holdout"
+}
