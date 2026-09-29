@@ -1,0 +1,33 @@
+{
+  "assumptions": {
+    "purpose": "Ridge shrinkage sensitivity; predeclared before holdout inspection",
+    "penalties": [
+      50.0,
+      100.0,
+      200.0
+    ],
+    "penalty_scale": "standardized 28-day hourly returns; lambda=100 is audited baseline",
+    "frequency_min": 15,
+    "center_hours": 4,
+    "scale_days": 7,
+    "entry_sigma": 2.0,
+    "exit_sigma": 0.5,
+    "hold_hours": 4,
+    "cost_bp": [
+      0.0,
+      2.0,
+      5.0,
+      10.0
+    ],
+    "fee_mode": "gross aggregate order turnover",
+    "funding": "local cached Binance funding events; cashflow reported",
+    "flat_boundaries": [
+      "2026-05-01 00:00:00+00:00",
+      "2026-07-01 00:00:00+00:00"
+    ],
+    "allocation": 0.1,
+    "max_positions": 3
+  },
+  "rows": 36,
+  "funding_events": 552
+}

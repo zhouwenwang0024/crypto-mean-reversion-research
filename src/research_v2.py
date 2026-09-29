@@ -149,8 +149,15 @@ def self_feature(close: pd.DataFrame, frequency: int) -> Feature:
     return Feature("B0", frequency, close, level, days, False)
 
 
-def residual_feature(close: pd.DataFrame, frequency: int, model: str) -> Feature:
-    """Daily-frozen return-factor residuals.  Every fit excludes the current day."""
+def residual_feature(close: pd.DataFrame, frequency: int, model: str,
+                     ridge_lambda: float = 100.0) -> Feature:
+    """Daily-frozen return-factor residuals.
+
+    ``ridge_lambda`` is exposed for a predeclared sensitivity check.  The
+    default stays at the audited value (100 on standardized returns), so all
+    existing callers and result files retain their original semantics.
+    Every fit excludes the current day.
+    """
     ret = np.log(close).diff()
     n, p = ret.shape
     bars_day = 24 * 60 // frequency
@@ -194,7 +201,10 @@ def residual_feature(close: pd.DataFrame, frequency: int, model: str) -> Feature
                 xm, xs = x.mean(0), x.std(0, ddof=1).clip(min=1e-8)
                 ym, ys = y.mean(), max(float(y.std(ddof=1)), 1e-8)
                 xn, yn = (x - xm) / xs, (y - ym) / ys
-                beta_n = np.linalg.solve(xn.T @ xn + 100.0 * np.eye(p - 1), xn.T @ yn)
+                penalty = float(ridge_lambda)
+                if penalty < 0 or not np.isfinite(penalty):
+                    raise ValueError("ridge_lambda must be a finite non-negative number")
+                beta_n = np.linalg.solve(xn.T @ xn + penalty * np.eye(p - 1), xn.T @ yn)
                 beta = ys * beta_n / xs
                 alpha = ym - xm @ beta
                 hedge[i, i] = 1.0
