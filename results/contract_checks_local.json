@@ -1,0 +1,30 @@
+{
+  "causal_suffix": [
+    {
+      "cut": "2026-05-21 12:00",
+      "dev_prefix_error": 0.0,
+      "W_prefix_error": 0.0,
+      "equity_prefix_error": 0.0,
+      "quantity_prefix_error": 0.0,
+      "future_equity_changed": 0.34206907344816995
+    },
+    {
+      "cut": "2026-07-15 00:00",
+      "dev_prefix_error": 0.0,
+      "W_prefix_error": 0.0,
+      "equity_prefix_error": 0.0,
+      "quantity_prefix_error": 0.0,
+      "future_equity_changed": 0.5980196134453801
+    }
+  ],
+  "unit_invariance": {
+    "original_max_equity_error": 0.0009249094026968496,
+    "tolerant_max_equity_error": 7.327471962526033e-15
+  },
+  "mutations": {
+    "remove_fees_detected": true,
+    "reverse_direction_detected": true,
+    "size_using_future_detected": true
+  },
+  "all_pass": true
+}

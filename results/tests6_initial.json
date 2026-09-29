@@ -1,0 +1,62 @@
+[
+  {
+    "test": "test_ridge_direct_equals_precision",
+    "passed": true
+  },
+  {
+    "test": "test_future_fit_inputs_isolation",
+    "passed": true
+  },
+  {
+    "test": "test_normalized_penalty",
+    "passed": true
+  },
+  {
+    "test": "test_rolling_excludes_current",
+    "passed": true
+  },
+  {
+    "test": "test_ewm_lagmatched",
+    "passed": true
+  },
+  {
+    "test": "test_state_prior_not_current",
+    "passed": true
+  },
+  {
+    "test": "test_state_future_prefix",
+    "passed": true
+  },
+  {
+    "test": "test_live_exit_not_frozen",
+    "passed": true
+  },
+  {
+    "test": "test_no_phantom_repricing_profit",
+    "passed": true
+  },
+  {
+    "test": "test_sign_correct",
+    "passed": true
+  },
+  {
+    "test": "test_order_time_and_future_price",
+    "passed": true
+  },
+  {
+    "test": "test_true_timeout",
+    "passed": true
+  },
+  {
+    "test": "test_fixed_price_cost",
+    "passed": true
+  },
+  {
+    "test": "test_zero_cross_jump",
+    "passed": true
+  },
+  {
+    "test": "test_independent_account",
+    "passed": true
+  }
+]

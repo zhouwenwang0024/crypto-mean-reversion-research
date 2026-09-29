@@ -1,0 +1,44 @@
+[
+  {
+    "start": "2026-05-01",
+    "raw_return": 0.19352005842631925,
+    "corrected_return": 0.19352005842631925,
+    "difference_pp": 0.0,
+    "raw_trades": 475,
+    "corrected_trades": 475,
+    "changed_trade_count": 0
+  },
+  {
+    "start": "2026-07-01",
+    "raw_return": 0.10773600746505552,
+    "corrected_return": 0.10683426017632414,
+    "difference_pp": -0.09017472887313804,
+    "raw_trades": 402,
+    "corrected_trades": 402,
+    "changed_trade_count": 1,
+    "evidence": {
+      "symbol": "AAVEUSDT",
+      "signal_minute": 250420,
+      "entry_minute": 250421,
+      "raw_exit_minute": 250556,
+      "corrected_exit_minute": 250555,
+      "checks": [
+        {
+          "time": "2026-08-21 23:54:00+00:00",
+          "fraction": "-0.029999999999999943",
+          "last_close": 122.57
+        },
+        {
+          "time": "2026-08-21 23:55:00+00:00",
+          "fraction": "-0.03319327731092439",
+          "last_close": 122.95
+        },
+        {
+          "time": "2026-08-21 23:56:00+00:00",
+          "fraction": "-0.03042016806722693",
+          "last_close": 122.62
+        }
+      ]
+    }
+  }
+]

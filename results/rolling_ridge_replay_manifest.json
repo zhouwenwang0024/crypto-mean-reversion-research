@@ -1,0 +1,16 @@
+{
+  "strategy": "ridge_sma3/live_gap25",
+  "data": "local data/klines; 20 symbols; 2026-03-01/2026-09-01",
+  "costs_bp": [
+    0,
+    2,
+    5,
+    10
+  ],
+  "stop_fix": "corrected engine pfrac <= -0.03 + 1e-12; raw engine retained separately",
+  "feature_cache": "spec-tagged and force rebuilt for each run",
+  "raw_result_available": true,
+  "corrected_result_available": true,
+  "formal_primary": "rolling_ridge_corrected.csv",
+  "raw_comparison": "rolling_ridge_raw.csv"
+}

@@ -1,0 +1,8 @@
+{
+  "dev_maxerr": 5.615754676601206e-11,
+  "center_maxerr": 5.615863329921922e-11,
+  "scale_maxerr": 2.047676698341272e-12,
+  "W_maxerr": 4.614364446098307e-15,
+  "daily_snapshots": 154,
+  "per_target_direct_fits": 3080
+}

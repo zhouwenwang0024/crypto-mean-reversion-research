@@ -16,6 +16,8 @@ C=ROOT/'tmp'/'rolling_ridge_cache';R=ROOT/'results'
 
 SPECS=[
  {'id':'ridge_sma3','fit':'ridge','update':1440,'hours':3,'anchor':'sma'},
+ {'id':'ridge_p05_sma3','fit':'ridge','penalty':0.05,'update':1440,'hours':3,'anchor':'sma'},
+ {'id':'ridge_p20_sma3','fit':'ridge','penalty':0.20,'update':1440,'hours':3,'anchor':'sma'},
  {'id':'pca2_sma3','fit':'pca2','update':1440,'hours':3,'anchor':'sma'},
  {'id':'pca3_sma3','fit':'pca3','update':1440,'hours':3,'anchor':'sma'},
  {'id':'pca5_sma3','fit':'pca5','update':1440,'hours':3,'anchor':'sma'},
@@ -28,7 +30,7 @@ SPECS=[
  {'id':'ridge_partial_state','fit':'ridge','update':1440,'hours':3,'anchor':'state'},
 ]
 
-def fit_ridge(ret,method='ridge'):
+def fit_ridge(ret,method='ridge',penalty=0.1):
  n,p=ret.shape
  sd=ret.std(0,ddof=1);mu=ret.mean(0);assert np.all(sd>0) and np.isfinite(ret).all()
  z=(ret-mu)/sd
@@ -42,18 +44,18 @@ def fit_ridge(ret,method='ridge'):
   obj=LedoitWolf(assume_centered=True).fit(z);co=obj.covariance_;meta={'shrinkage':float(obj.shrinkage_)}
  else:co=z.T@z/(n-1)
  if method!='huber':
-  K=np.linalg.inv(co+ (0.0 if method=='lw' else .1)*np.eye(p))
+  K=np.linalg.inv(co+ (0.0 if method=='lw' else penalty)*np.eye(p))
   W=K/np.diag(K)[:,None]*sd[:,None]/sd[None,:]
   return W, (meta if method=='lw' else {})
  # Huber residual-reweighted loss; regularization is normalized, no forward clipping.
  W=np.eye(p);diag=[]
  for j in range(p):
-  ids=np.delete(np.arange(p),j);x=z[:,ids];y=z[:,j];b=np.linalg.solve(co[np.ix_(ids,ids)]+.1*np.eye(p-1),co[ids,j]);a=0.
+  ids=np.delete(np.arange(p),j);x=z[:,ids];y=z[:,j];b=np.linalg.solve(co[np.ix_(ids,ids)]+penalty*np.eye(p-1),co[ids,j]);a=0.
   for _ in range(5):
    e=y-a-x@b;es=max(1e-6,1.4826*np.median(np.abs(e-np.median(e))))
    wt=np.minimum(1.,1.5*es/np.maximum(np.abs(e),1e-12));wt/=wt.sum()
    xm=wt@x;ym=wt@y;xx=x-xm
-   b=np.linalg.solve((xx*wt[:,None]).T@xx+.1*np.eye(p-1),(xx*wt[:,None]).T@(y-ym));a=ym-xm@b
+   b=np.linalg.solve((xx*wt[:,None]).T@xx+penalty*np.eye(p-1),(xx*wt[:,None]).T@(y-ym));a=ym-xm@b
   W[j,ids]=-b*sd[j]/sd[ids];diag.append(float((np.abs(e)>1.5*es).mean()))
  return W,{'huber_downweight_fraction':float(np.mean(diag))}
 
@@ -147,7 +149,7 @@ def make(spec,force=False):
    w=np.mean(np.stack([fit_ridge(hist(f))[0] for f in (15,60,240)]),axis=0);mm={}
   elif spec['fit'].startswith('pca'):
    w,mm=fit_pca(hist(60),int(spec['fit'][3:]))
-  else:w,mm=fit_ridge(hist(60),spec['fit'])
+  else:w,mm=fit_ridge(hist(60),spec['fit'],spec.get('penalty',0.1))
   assert np.isfinite(w).all() and np.allclose(np.diag(w),1.)
   W.append(w);fitmeta.append(dict(time=int(t),day=t//1440,model=name,gross_median=float(np.median(abs(w).sum(1))),**mm))
  W=np.stack(W)

@@ -1,5 +1,18 @@
 ﻿# 20 个币种均值回归与统计套利研究
 
+滚动 Ridge 交接包复现、独立账本审计和严格引擎 PCA 对照见 [`REPORT_ROLLING_RIDGE_AUDIT_ZH.md`](REPORT_ROLLING_RIDGE_AUDIT_ZH.md)。正式入口只读取仓库已有数据：
+
+```powershell
+python src/rolling_ridge_audit/replay.py
+python src/rolling_ridge_audit/independent_checks.py
+python src/rolling_ridge_audit/contract_checks.py
+python src/rolling_ridge_audit/pca_compare.py
+python src/rolling_ridge_audit/ridge_penalty_compare.py
+python src/rolling_ridge_audit/funding_replay.py
+```
+
+缓存写入被忽略的 `tmp/rolling_ridge_cache`，不会下载行情。
+
 正式样本为 20 个 Binance USDT 永续标的，覆盖 2026 年 3—8 月的 1 分钟数据。研究优先看 [REPORT_V3.md](REPORT_V3.md)；它在已审计的 v2 账本上比较了多种合理价、周期和开平仓规则，并报告了完整留出期结果。
 
 v3 的主要代码是 `src/research_v3.py`，会读取本地 Parquet，构造 B0、等权 PEER、留一中位数信号、Ridge、PCA1/3/5 和 AR1 控制。每个配置只使用当前完成柱之前的数据，信号柱结束后延迟两分钟，用真实 1 分钟开盘成交，计入资金费和每腿 gross turnover 成本。

@@ -1,0 +1,7 @@
+{
+  "source": "results/funding_api/*.parquet",
+  "rows": 11040,
+  "mark_price": true,
+  "cashflow": "-side*quantity*mark_price*funding_rate",
+  "missing_is_error": true
+}

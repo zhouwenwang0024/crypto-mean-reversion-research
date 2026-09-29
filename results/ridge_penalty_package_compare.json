@@ -1,0 +1,19 @@
+{
+  "models": [
+    "ridge_p05_sma3",
+    "ridge_sma3",
+    "ridge_p20_sma3"
+  ],
+  "penalty": [
+    0.05,
+    0.1,
+    0.2
+  ],
+  "same_engine": true,
+  "cost_bp": [
+    0,
+    2,
+    5,
+    10
+  ]
+}
