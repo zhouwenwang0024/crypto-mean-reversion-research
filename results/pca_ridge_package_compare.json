@@ -1,0 +1,25 @@
+{
+  "models": [
+    "ridge_sma3",
+    "pca2_sma3",
+    "pca3_sma3",
+    "pca5_sma3"
+  ],
+  "periods": [
+    "validation",
+    "holdout"
+  ],
+  "cost_bp": [
+    0.0,
+    2.0,
+    5.0,
+    10.0
+  ],
+  "engine": "handoff engine corrected stop",
+  "clock": "1m monitor, 5m signals, close[t-1] sizing, open[t+1] fill",
+  "entry": "|z|>=2 and abs(expm1 residual)>=1.5%, target-only",
+  "exit": "live_gap25, max 240m, inclusive 3% stop",
+  "budget": "30% per lot, 90% aggregate, max 3",
+  "fees": "net aggregate order turnover; funding excluded",
+  "pca_fit": "other 19 standardized hourly returns, 28d, normalized penalty 0.1"
+}
