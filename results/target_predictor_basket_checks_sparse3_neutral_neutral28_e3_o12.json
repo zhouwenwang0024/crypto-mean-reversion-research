@@ -1,0 +1,40 @@
+{
+  "targets": [
+    "BTC",
+    "ETH",
+    "BNB",
+    "SOL",
+    "XRP",
+    "DOGE",
+    "ADA",
+    "TRX",
+    "LINK",
+    "SUI",
+    "AVAX",
+    "LTC",
+    "BCH",
+    "DOT",
+    "HBAR",
+    "XLM",
+    "FIL",
+    "UNI",
+    "NEAR",
+    "AAVE"
+  ],
+  "selection_uses_return": false,
+  "models": [
+    "sparse3_neutral"
+  ],
+  "fee_sensitivity_rows": 0,
+  "quality_rows": 20,
+  "basket_prediction_rows": 59904,
+  "entry_z": 3.0,
+  "exit_z": 0.5,
+  "rearm_z": 1.0,
+  "hold_days": 28,
+  "observe_bars": 12,
+  "force_month_boundary": true,
+  "rolling_days": 28,
+  "event_date_excluded_from_selection": true,
+  "stat_arb_legs": "target_vs_frozen_peer_basket"
+}

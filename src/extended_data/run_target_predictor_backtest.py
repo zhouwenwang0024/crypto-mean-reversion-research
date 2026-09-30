@@ -346,7 +346,9 @@ def run_target_basket(index: pd.DatetimeIndex, op: np.ndarray, close: np.ndarray
                       exit_z: float = EXIT_Z, rearm_z: float = REARM_Z,
                       hold_bars: int = MAX_HOLD_BARS,
                       direction_mutant: bool = False,
-                      force_month_boundary: bool = True) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, dict]:
+                      force_month_boundary: bool = True,
+                      observe_bars: int = 1,
+                      phase_bars: int = 0) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, dict]:
     """Two-sided target versus frozen synthetic peer basket account."""
     fee_rate = fee_bp / 10_000.0; ncoin = len(SYMBOLS); symbol = SYMBOLS[target]
     cash = 1.0; q = np.zeros(ncoin); entry_px = np.full(ncoin, np.nan)
@@ -405,10 +407,12 @@ def run_target_basket(index: pd.DatetimeIndex, op: np.ndarray, close: np.ndarray
         if entry_t is not None:
             timed = t + 1 - entry_t >= hold_bars
             boundary = force_month_boundary and (index[t] + pd.Timedelta(minutes=5) >= next_month)
-            if boundary or timed or (z_valid and abs(zt) <= exit_z):
-                reason = "mean" if z_valid and abs(zt) <= exit_z else ("month_boundary" if boundary else "timeout")
+            observed = (t - phase_bars) % observe_bars == 0
+            mean_exit = observed and z_valid and abs(zt) <= exit_z
+            if boundary or timed or mean_exit:
+                reason = "mean" if mean_exit else ("month_boundary" if boundary else "timeout")
                 pending_exit = (t, reason); blocked = True
-        elif z_valid:
+        elif z_valid and (t - phase_bars) % observe_bars == 0:
             if blocked:
                 if abs(zt) <= rearm_z: blocked = False
             elif abs(zt) >= entry_z:
@@ -429,6 +433,7 @@ def run_target_basket(index: pd.DatetimeIndex, op: np.ndarray, close: np.ndarray
                "gross_pnl": gross_total, "fees": fee_total, "funding": funding_total,
                "turnover": float((order_df.quantity_change.abs() * order_df.price).sum()) if len(order_df) else 0.0,
                "fee_bp_one_way": fee_bp, "funding_enabled": use_funding, "basket": True, "direction_mutant": direction_mutant,
+               "force_month_boundary": force_month_boundary, "observe_bars": observe_bars, "phase_bars": phase_bars,
                "reconciliation_error": float(curve[-1] - 1 - (trade_df.net_pnl.sum() if len(trade_df) else 0.0)),
                "max_gross_exposure": float(frame.gross_exposure.max()), "max_abs_net_exposure": float(frame.net_exposure.abs().max()),
                "max_target_exposure": float(frame.target_exposure.abs().max()), "max_hedge_exposure": float(frame.hedge_exposure.abs().max())}
@@ -491,18 +496,28 @@ def event_row(bar_df: pd.DataFrame, trade_df: pd.DataFrame, target: str, zone: s
     changes = bar_df.equity.pct_change().fillna(bar_df.equity.iloc[0] - 1.0)
     idx = np.flatnonzero(mask.to_numpy()); before = float(bar_df.equity.iloc[idx[0] - 1]) if len(idx) and idx[0] else 1.0
     after = float(bar_df.equity.iloc[idx[-1]]) if len(idx) else before
-    crossing = 0
+    crossing = 0; crossing_net = 0.0
     if len(trade_df):
-        crossing = int(((pd.to_datetime(trade_df.entry_time, utc=True) < end) & (pd.to_datetime(trade_df.exit_time, utc=True) >= start)).sum())
+        cross = ((pd.to_datetime(trade_df.entry_time, utc=True) < end) & (pd.to_datetime(trade_df.exit_time, utc=True) >= start))
+        crossing = int(cross.sum()); crossing_net = float(trade_df.loc[cross, "net_pnl"].sum())
     return {"target": target, "timezone": zone, "event_start_utc": str(start), "event_end_utc_exclusive": str(end),
             "event_bars": int(mask.sum()), "event_equity_change": after - before,
-            "event_return_zeroed": float((1.0 + changes.where(~mask, 0.0)).prod() - 1.0), "crossing_trades": crossing}
+            "event_return_zeroed": float((1.0 + changes.where(~mask, 0.0)).prod() - 1.0),
+            "crossing_trades": crossing, "crossing_trade_net_pnl": crossing_net}
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(); parser.add_argument("--predictions", type=Path, default=RESULTS / "target_predictor_selected.csv")
     parser.add_argument("--model", default=None, help="model name for selected-model CSV (default: run every model)")
     parser.add_argument("--skip-cost", action="store_true", help="skip fixed-order fee sensitivity")
+    parser.add_argument("--hold-days", type=int, default=14)
+    parser.add_argument("--entry-z", type=float, default=ENTRY_Z)
+    parser.add_argument("--exit-z", type=float, default=EXIT_Z)
+    parser.add_argument("--rearm-z", type=float, default=REARM_Z)
+    parser.add_argument("--observe-bars", type=int, default=1)
+    parser.add_argument("--phase-bars", type=int, default=0)
+    parser.add_argument("--cross-month", action="store_true")
+    parser.add_argument("--label", default="", help="suffix for experiment result files")
     parser.add_argument("--start", default="2024-06-01"); parser.add_argument("--end", default="2026-09-01")
     args = parser.parse_args()
     index, op, close, _ = load_prices(); rates, marks, _ = load_funding(index)
@@ -520,13 +535,20 @@ def main() -> None:
         base_orders: dict[int, pd.DataFrame] = {}
         for j in active_targets:
             target = SYMBOLS[j]
-            bars, trades, orders, summary = run_target_basket(index, op, close, rates, marks, z, hedge_map, j, start, end)
+            bars, trades, orders, summary = run_target_basket(
+                index, op, close, rates, marks, z, hedge_map, j, start, end,
+                hold_bars=args.hold_days * 288, entry_z=args.entry_z,
+                exit_z=args.exit_z, rearm_z=args.rearm_z,
+                observe_bars=args.observe_bars, phase_bars=args.phase_bars,
+                force_month_boundary=not args.cross_month,
+            )
             summary["model"] = model_name or "direct"
             replay = replay_basket(index, op, close, rates, marks, orders, j, start, end, 5.0, True)
             summary["independent_replay_error"] = replay - bars.equity.iloc[-1]
             if abs(summary["independent_replay_error"]) > 1e-9: raise AssertionError(summary)
             base_orders[j] = orders
-            prefix = RESULTS / f"target_predictor_{model_name + '_' if model_name else ''}{target}"
+            label_part = f"_{args.label}" if args.label else ""
+            prefix = RESULTS / f"target_predictor_{model_name + label_part + '_' if model_name else ''}{target}"
             trades.to_csv(str(prefix) + "_trades.csv", index=False); orders.to_csv(str(prefix) + "_orders.csv", index=False)
             summaries.append(summary); events.extend(event_row(bars, trades, target, zone) | {"model": model_name or "direct"} for zone in ("UTC", "Asia/Shanghai"))
         if not args.skip_cost:
@@ -538,12 +560,16 @@ def main() -> None:
                                   "fee_bp_one_way": bp, "funding_enabled": fund, "fixed_signal_orders": True})
                         cost_rows.append(s)
     suffix = f"_{model_names[0]}" if len(model_names) == 1 else ""
+    if args.label:
+        suffix += f"_{args.label}"
     pd.DataFrame(summaries).to_csv(RESULTS / f"target_predictor_basket_summary{suffix}.csv", index=False)
     pd.DataFrame(cost_rows).to_csv(RESULTS / f"target_predictor_basket_cost_sensitivity{suffix}.csv", index=False)
     pd.DataFrame(events).to_csv(RESULTS / f"target_predictor_basket_event_attribution{suffix}.csv", index=False)
     pd.concat(qualities, ignore_index=True).to_csv(RESULTS / f"target_predictor_basket_quality{suffix}.csv", index=False)
     checks.update({"fee_sensitivity_rows": len(cost_rows), "quality_rows": int(sum(len(x) for x in qualities)), "basket_prediction_rows": total_hedge_rows,
-                   "entry_z": ENTRY_Z, "exit_z": EXIT_Z, "rolling_days": ROLLING_DAYS,
+                   "entry_z": args.entry_z, "exit_z": args.exit_z, "rearm_z": args.rearm_z,
+                   "hold_days": args.hold_days, "observe_bars": args.observe_bars,
+                   "force_month_boundary": not args.cross_month, "rolling_days": ROLLING_DAYS,
                    "event_date_excluded_from_selection": True, "stat_arb_legs": "target_vs_frozen_peer_basket"})
     (RESULTS / f"target_predictor_basket_checks{suffix}.json").write_text(json.dumps(checks, ensure_ascii=False, indent=2), encoding="utf-8")
     print(pd.DataFrame(summaries).to_string(index=False))

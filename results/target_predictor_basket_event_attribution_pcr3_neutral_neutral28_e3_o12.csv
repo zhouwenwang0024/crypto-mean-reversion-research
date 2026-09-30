@@ -1,0 +1,5 @@
+target,timezone,event_start_utc,event_end_utc_exclusive,event_bars,event_equity_change,event_return_zeroed,crossing_trades,crossing_trade_net_pnl,model
+ADA,UTC,2025-10-11 00:00:00+00:00,2025-10-12 00:00:00+00:00,288,0.0,0.01241025528477735,0,0.0,pcr3_neutral
+ADA,Asia/Shanghai,2025-10-10 16:00:00+00:00,2025-10-11 16:00:00+00:00,288,0.0,0.01241025528477735,0,0.0,pcr3_neutral
+AVAX,UTC,2025-10-11 00:00:00+00:00,2025-10-12 00:00:00+00:00,288,0.0,0.001226040748669055,0,0.0,pcr3_neutral
+AVAX,Asia/Shanghai,2025-10-10 16:00:00+00:00,2025-10-11 16:00:00+00:00,288,0.0,0.001226040748669055,0,0.0,pcr3_neutral

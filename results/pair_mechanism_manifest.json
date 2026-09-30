@@ -1,0 +1,61 @@
+{
+  "status": "complete",
+  "started_at_utc": "2026-09-30T13:29:59.406506+00:00",
+  "source_runner_sha256": "949d24d492318603e76cf9a667cf81563b374e83dec008660fab692253478bcd",
+  "source_formation": "results/statarb_formation_selected.csv",
+  "start": "2024-06-01",
+  "end": "2026-09-01",
+  "fee_bp": 5.0,
+  "gross_limit": 0.9,
+  "funding": true,
+  "experiments": [
+    {
+      "name": "baseline",
+      "hold_days": 56,
+      "entry_z": 3.0,
+      "exit_z": 0.5,
+      "selector": "all_selected"
+    },
+    {
+      "name": "entry_275",
+      "hold_days": 56,
+      "entry_z": 2.75,
+      "exit_z": 0.5,
+      "selector": "all_selected"
+    },
+    {
+      "name": "entry_325",
+      "hold_days": 56,
+      "entry_z": 3.25,
+      "exit_z": 0.5,
+      "selector": "all_selected"
+    },
+    {
+      "name": "hold_42d",
+      "hold_days": 42,
+      "entry_z": 3.0,
+      "exit_z": 0.5,
+      "selector": "all_selected"
+    },
+    {
+      "name": "hold_70d",
+      "hold_days": 70,
+      "entry_z": 3.0,
+      "exit_z": 0.5,
+      "selector": "all_selected"
+    },
+    {
+      "name": "stable_gap015",
+      "hold_days": 56,
+      "entry_z": 3.0,
+      "exit_z": 0.5,
+      "selector": "beta_relative_gap_le_015"
+    }
+  ],
+  "known_history_continuation": true,
+  "finished_at_utc": "2026-09-30T13:35:00.135227+00:00",
+  "summary_rows": 6,
+  "cost_rows": 4,
+  "event_rows": 12,
+  "max_replay_error": 2.220446049250313e-15
+}

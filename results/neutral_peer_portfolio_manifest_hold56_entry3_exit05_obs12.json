@@ -1,0 +1,40 @@
+{
+  "source": "D:\\mean-return\\crypto-mean-reversion-research\\results\\neutral_peer_selected.csv",
+  "source_runner_sha256": "c58aa9eb9423fb2ee4ebe6689581382090b9d95df791853e2eb80e264c0ffa52",
+  "selected_sha256": "96d1b61189b2051de4541d8f97e21686c668fb547d3d25838e4cc033d4d21f96",
+  "archive_sha256": "a0aba52ca865bc50a6cb4d46c2d67670e6b2d8faeb25430197e3860ee30784ef",
+  "data_period": "2024-02 through 2026-08, evaluated 2024-06-01 through 2026-09-01",
+  "funding_events": 11040,
+  "start": "2024-06-01",
+  "end": "2026-09-01",
+  "entry_z": 3.0,
+  "exit_z": 0.5,
+  "rearm_z": 1.0,
+  "observe_bars": 12,
+  "hold_days": 56,
+  "max_positions": 3,
+  "target_budget": 0.3,
+  "sizing": "each entry uses 30% of marked current equity at the executable next-open; target and hedge legs share that budget",
+  "force_month_boundary": true,
+  "models": [
+    "equal19",
+    "neutral_ridge",
+    "pcr3_neutral",
+    "simplex_ridge",
+    "sparse3_neutral"
+  ],
+  "netting": "same UTC timestamp and symbol signed quantities are aggregated; fee is abs(net quantity*price)*fee_bp",
+  "funding_attribution": "cash funding is computed on aggregate q; trade attribution uses each position q",
+  "event_exclusion": "2025-10-11 is reported in UTC and Asia/Shanghai and is never used for selection",
+  "independent_replay_max_abs_error": 2.886579864025407e-15,
+  "files": {
+    "neutral_peer_portfolio_summary_hold56_entry3_exit05_obs12.csv": "16344724445a6f4993f685a010c29d432fde690a0f92b6a577338ecf43e32c98",
+    "neutral_peer_portfolio_events_hold56_entry3_exit05_obs12.csv": "b5b08c1c549ddcc17744f67e8cee511557d291dcf63f97df5269838039604a0c",
+    "neutral_peer_portfolio_costs_hold56_entry3_exit05_obs12.csv": "60e02b2a61a6a654f7448917aefb804c3fe4e2fc00b8fadc8401bb792a3fdabc",
+    "neutral_peer_portfolio_equal19_hold56_entry3_exit05_obs12_orders.csv": "f47a17a713f1384aa6711643c9682165523baacefdbfb11161a4c56802a2776f",
+    "neutral_peer_portfolio_neutral_ridge_hold56_entry3_exit05_obs12_orders.csv": "2f43ee726fd071b44ff62cae48f7a478956e287e3d29ea82f47a33f47779d928",
+    "neutral_peer_portfolio_pcr3_neutral_hold56_entry3_exit05_obs12_orders.csv": "b5e6dac8f9f82bccdd79f4df2af5f63022c457573dff8683337cc2a774eadaf1",
+    "neutral_peer_portfolio_simplex_ridge_hold56_entry3_exit05_obs12_orders.csv": "ac48957b21e41790f9b3dac94174c044c6be500cca10500dab6cc470e9a2b366",
+    "neutral_peer_portfolio_sparse3_neutral_hold56_entry3_exit05_obs12_orders.csv": "83ea3bda6295622d59ee5c2283c3dca41afee8f5fac22132510a53f4e76568eb"
+  }
+}

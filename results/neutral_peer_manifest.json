@@ -1,0 +1,24 @@
+{
+  "source": "data/combined_5m_2024-02_to_2026-08.zip",
+  "fit_days": 60,
+  "calibration_days": 28,
+  "hourly_formation": true,
+  "formation_period": "2024-06-01/2026-09-01",
+  "models": [
+    "equal19",
+    "simplex_ridge",
+    "neutral_ridge",
+    "pcr3_neutral",
+    "sparse3_neutral"
+  ],
+  "alpha": 0.1,
+  "selection": "OOS calibration: R2>=0, ADF lag1 p<=.10, monthly BH q<=.10 across 100 target-model hypotheses, half-life 6-168h, scale ratio<=2.5",
+  "diagnostic_rows": 2700,
+  "selected_rows": 31,
+  "optimization_failures": 0,
+  "files": {
+    "neutral_peer_selected.csv": "96d1b61189b2051de4541d8f97e21686c668fb547d3d25838e4cc033d4d21f96",
+    "neutral_peer_diagnostics.csv.gz": "b03f4862274d2d5795559a559967136bb7a5382d2b03cc2e818e641a6f0e843c",
+    "neutral_peer_summary.csv": "c54826adc7448304fba28a72e3292da0e531b893ddc72d4e64e2137ec8f29a81"
+  }
+}
