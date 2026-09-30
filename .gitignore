@@ -7,6 +7,8 @@ results/extended_*_trades.csv
 results/statarb_*_equity.csv
 results/statarb_formation_diagnostics.csv
 results/statarb_selected_60d.csv
+results/target_predictor_diagnostics.csv
+results/target_predictor_*_equity.csv
 long_run.log
 tmp/
 *.part

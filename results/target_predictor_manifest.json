@@ -1,0 +1,15 @@
+{
+  "source": "data/combined_5m_2024-02_to_2026-08.zip",
+  "fit_days": 60,
+  "calibration_days": 28,
+  "hourly_formation": true,
+  "formation_period": "2024-06-01/2026-09-01",
+  "estimators": [
+    "ridge",
+    "ols"
+  ],
+  "ridge_alpha": 10.0,
+  "selection": "OOS calibration only: R2>=0, raw ADF p<=0.10, within-month-model BH q<=0.10, residual half-life 6-168h, scale ratio<=2.5",
+  "selected_rows": 14,
+  "diagnostic_rows": 1080
+}
