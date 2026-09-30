@@ -1,0 +1,28 @@
+{
+  "archive_sha256": "a0aba52ca865bc50a6cb4d46c2d67670e6b2d8faeb25430197e3860ee30784ef",
+  "grid_rows_5m": 271584,
+  "funding_events": 56580,
+  "horizons_min": [
+    5,
+    15,
+    30,
+    60
+  ],
+  "rules": [
+    "directional_sign",
+    "directional_top30",
+    "cross_sectional_5x5"
+  ],
+  "signal": "previous completed bar open-to-close return",
+  "entry": "next bar open",
+  "exit": "following bar open",
+  "costs_one_way_bp": [
+    0,
+    2,
+    5,
+    10
+  ],
+  "selection": "all horizons, rules, periods and costs fixed before reading results",
+  "zero_quote_volume_5m_cells": 420,
+  "zero_volume_policy": "exclude assets when signal or entry bar quote_volume is zero"
+}
