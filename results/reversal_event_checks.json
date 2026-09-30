@@ -1,0 +1,11 @@
+{
+  "original_return": 0.4272992283714123,
+  "independent_return": 0.427299228371413,
+  "max_independent_equity_error": 8.881784197001252e-16,
+  "first_equity_divergence_over_1e_10": null,
+  "max_bar_component_error": 4.479923376710104e-16,
+  "trade_funding_reconciliation_error": -4.996003610813204e-16,
+  "trade_count": 32,
+  "cost_bp_one_way": 5.0,
+  "interpretation": "Retrospective attribution on the unchanged old rank-reversal ledger. Event-excluded curves are not executable strategies or unseen validation. Crossing trade PnL includes its entire life, both fees, and all funding."
+}

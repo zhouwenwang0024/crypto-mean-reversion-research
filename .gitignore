@@ -4,6 +4,10 @@ results/new_reversal_events.csv
 results/new_cross_sectional_events.csv
 results/extended_*_equity.csv
 results/extended_*_trades.csv
+results/statarb_*_equity.csv
+results/statarb_formation_diagnostics.csv
+results/statarb_selected_60d.csv
+long_run.log
 tmp/
 *.part
 __pycache__/

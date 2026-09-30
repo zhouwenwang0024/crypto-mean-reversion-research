@@ -1,0 +1,19 @@
+{
+  "source": "data/combined_5m_2024-02_to_2026-08.zip",
+  "fit_days": 60,
+  "calibration_days": 28,
+  "hourly_formation": true,
+  "formation_period": "2024-06-01/2026-09-01",
+  "models": [
+    "ols_log",
+    "tls_log",
+    "huber_log",
+    "minvar_return",
+    "johansen"
+  ],
+  "fdr_q": 0.1,
+  "max_selected_per_model_month": 3,
+  "selection": "ADF Benjamini-Hochberg plus beta stability, AR half-life 6-168h, and split calibration recovery; no return selection",
+  "selected_rows": 100,
+  "diagnostic_rows": 25650
+}

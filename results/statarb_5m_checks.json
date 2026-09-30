@@ -1,0 +1,29 @@
+{
+  "models": [
+    "huber_log",
+    "johansen",
+    "minvar_return",
+    "ols_log",
+    "tls_log"
+  ],
+  "entry_z": 2.5,
+  "exit_z": 0.5,
+  "rearm_z": 1.0,
+  "max_hold_days": 14,
+  "pair_budget": 0.3,
+  "fee_bp": 5.0,
+  "event_data_retained": true,
+  "selection_uses_return": false,
+  "independent_replay_max_error": 2.1094237467877974e-15,
+  "cost_sensitivity_rows": 40,
+  "funding_sensitivity_rows": 5,
+  "direction_mutant_rows": 5,
+  "direction_mutant_returns": {
+    "huber_log": 0.10163118541273031,
+    "johansen": 0.06839060908547023,
+    "minvar_return": 0.2593944835939841,
+    "ols_log": 0.09254174746950272,
+    "tls_log": -0.018380286083416686
+  },
+  "tls_refresh_replay_error": 9.992007221626409e-16
+}

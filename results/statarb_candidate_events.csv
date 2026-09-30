@@ -1,0 +1,3 @@
+timezone,event_start_utc,event_end_utc_exclusive,bars,event_net_pnl,event_price_pnl,event_fees,event_funding,crossing_trades,full_return,fixed_original_ledger_return_minus_event,return_zeroing_event_interval_returns
+UTC,2025-10-11 00:00:00+00:00,2025-10-12 00:00:00+00:00,288,0.0,0.0,0.0,0.0,0,0.04895895685715357,0.04895895685715357,0.048958956856554714
+Asia/Shanghai,2025-10-10 16:00:00+00:00,2025-10-11 16:00:00+00:00,288,0.0,0.0,0.0,0.0,0,0.04895895685715357,0.04895895685715357,0.048958956856554714
