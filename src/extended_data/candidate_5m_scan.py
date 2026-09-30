@@ -50,6 +50,9 @@ def load() -> tuple[pd.DatetimeIndex, np.ndarray, np.ndarray]:
 
 def summary(rets: np.ndarray, times: pd.DatetimeIndex, name: str, fee_bp: float = 5.0) -> dict:
     if not len(rets): return {"model": name, "trades": 0}
+    formal = times >= pd.Timestamp("2024-03-01", tz="UTC")
+    rets, times = rets[formal], times[formal]
+    if not len(rets): return {"model": name, "trades": 0}
     net = rets - 2.0 * fee_bp / 10000.0
     eq = np.cumprod(1.0 + net)
     peak = np.maximum.accumulate(np.r_[1.0, eq])[1:]
@@ -78,7 +81,7 @@ def cross_sectional(op: np.ndarray, cl: np.ndarray, idx: pd.DatetimeIndex, lookb
             r = (r - np.median(r)) / (1.4826 * np.median(np.abs(r - np.median(r))) + 1e-12)
         order = np.argsort(r); lo, hi = order[:k], order[-k:]
         if np.mean(r[hi]) - np.mean(r[lo]) < min_spread: continue
-        fwd = logp[t + hold] - np.log(op[t])
+        fwd = np.log(op[t + hold]) - np.log(op[t])
         out.append(0.5 * (np.exp(fwd[lo]).mean() - np.exp(fwd[hi]).mean()))
         tt.append(idx[t])
     return np.asarray(out), pd.DatetimeIndex(tt)
@@ -91,7 +94,7 @@ def shock_reversal(op: np.ndarray, cl: np.ndarray, idx: pd.DatetimeIndex, lookba
     for t in range(lookback_b + 1, len(cl) - hold_b, hold_b):
         r = lp[t - 1] - lp[t - 1 - lookback_b]; order = np.argsort(r); lo, hi = order[:k], order[-k:]
         if np.mean(r[hi]) - np.mean(r[lo]) < min_spread: continue
-        fwd = lp[t + hold_b] - np.log(op[t]); out.append(0.5 * (np.exp(fwd[lo]).mean() - np.exp(fwd[hi]).mean())); tt.append(idx[t])
+        fwd = np.log(op[t + hold_b]) - np.log(op[t]); out.append(0.5 * (np.exp(fwd[lo]).mean() - np.exp(fwd[hi]).mean())); tt.append(idx[t])
     return np.asarray(out), pd.DatetimeIndex(tt)
 
 
@@ -99,7 +102,22 @@ def single_reversal(op: np.ndarray, cl: np.ndarray, idx: pd.DatetimeIndex, lookb
                     hold_h: int, j: int) -> tuple[np.ndarray, pd.DatetimeIndex]:
     lp = np.log(cl[:, j]); lb = lookback_h * 12; hold = hold_h * 12; out = []; tt = []
     for t in range(lb + 1, len(cl) - hold, hold):
-        sig = lp[t - 1] - lp[t - 1 - lb]; fwd = lp[t + hold] - np.log(op[t, j]); out.append(-np.sign(sig) * (np.exp(fwd) - 1.0)); tt.append(idx[t])
+        sig = lp[t - 1] - lp[t - 1 - lb]; fwd = np.log(op[t + hold, j]) - np.log(op[t, j]); out.append(-np.sign(sig) * (np.exp(fwd) - 1.0)); tt.append(idx[t])
+    return np.asarray(out), pd.DatetimeIndex(tt)
+
+
+def factor_residual(op: np.ndarray, cl: np.ndarray, idx: pd.DatetimeIndex, lookback_h: int,
+                    hold_h: int, k: int, formation_h: int = 24 * 30) -> tuple[np.ndarray, pd.DatetimeIndex]:
+    """Cross-sectional reversal of returns unexplained by a trailing BTC beta."""
+    lp = np.log(cl); out = []; tt = []; lb = lookback_h * 12; hold = hold_h * 12; fw = formation_h * 12
+    btc = np.diff(lp[:, 0]); stride = hold
+    for t in range(max(lb + 1, fw + 2), len(cl) - hold, stride):
+        x = btc[t - fw:t - 1]; xc = x - x.mean(); den = np.sum(xc * xc)
+        if den <= 1e-14: continue
+        betas = np.sum((np.diff(lp[t - fw:t], axis=0) - np.diff(lp[t - fw:t], axis=0).mean(0)) * xc[:, None], axis=0) / den
+        r = (lp[t - 1] - lp[t - 1 - lb]) - betas * (lp[t - 1, 0] - lp[t - 1 - lb, 0])
+        order = np.argsort(r); lo, hi = order[:k], order[-k:]; fwd = np.log(op[t + hold]) - np.log(op[t])
+        out.append(.5 * (np.exp(fwd[lo]).mean() - np.exp(fwd[hi]).mean())); tt.append(idx[t])
     return np.asarray(out), pd.DatetimeIndex(tt)
 
 
@@ -115,7 +133,7 @@ def residual_rank(op: np.ndarray, cl: np.ndarray, idx: pd.DatetimeIndex, lookbac
         med = np.median(past, axis=1)
         r = (lp[t - 1] - med[-1]) - (past[0] - med[0])
         order = np.argsort(r); lo, hi = order[:k], order[-k:]
-        fwd = lp[t + hold] - np.log(op[t])
+        fwd = np.log(op[t + hold]) - np.log(op[t])
         out.append(0.5 * (np.exp(fwd[lo]).mean() - np.exp(fwd[hi]).mean())); tt.append(idx[t])
     return np.asarray(out), pd.DatetimeIndex(tt)
 
@@ -157,7 +175,7 @@ def pair_static(op: np.ndarray, cl: np.ndarray, idx: pd.DatetimeIndex) -> tuple[
 
 
 def pair_dynamic(op: np.ndarray, cl: np.ndarray, idx: pd.DatetimeIndex, entry_z: float = 2.0,
-                 exit_z: float = .5, max_hold: int = 48) -> tuple[np.ndarray, pd.DatetimeIndex]:
+                 exit_z: float = .5, max_hold: int = 48, score_mode: str = "diff") -> tuple[np.ndarray, pd.DatetimeIndex]:
     """Monthly rolling formation: choose five short-half-life pairs causally."""
     lp = np.log(cl[::12]); oo = op[::12]; hh = idx[::12]; out = []
     months = pd.PeriodIndex(hh, freq="M").unique()
@@ -170,7 +188,9 @@ def pair_dynamic(op: np.ndarray, cl: np.ndarray, idx: pd.DatetimeIndex, entry_z:
         for a in range(lp.shape[1]):
             for b in range(a + 1, lp.shape[1]):
                 x, y = lp[hist, b], lp[hist, a]; beta = float(np.cov(x, y, ddof=1)[0, 1] / np.var(x, ddof=1))
-                s = y - beta * x; d = np.diff(s); rho = float(np.corrcoef(d[:-1], d[1:])[0, 1]) if len(d) > 2 else 1.0
+                s = y - beta * x; d = np.diff(s)
+                rho = float(np.corrcoef(d[:-1], d[1:])[0, 1]) if len(d) > 2 else 1.0
+                if score_mode == "level": rho = float(np.corrcoef(s[:-1], s[1:])[0, 1]) if len(s) > 2 else 1.0
                 # Fast, stable spread changes are selected from history only.
                 cand.append((rho, float(np.std(d)), a, b, beta))
         pairs = sorted(cand, key=lambda x: (x[0], x[1]))[:5]
@@ -206,6 +226,8 @@ def run() -> None:
                                      (24, 12, 12, .04), (24, 24, 24, .04)):
         r, t = cross_sectional(op, cl, idx, lb, hold, 3, stride, "raw", spread)
         rows.append(summary(r, t, f"cs_tail_{lb}h_{hold}h_spread{int(spread*100)}pct"))
+    r, t = cross_sectional(op, cl, idx, 336, 672, 2, 672, "raw")
+    rows.append(summary(0.9 * r, t, "cs_reversal_336h_672h_k2_budget90"))
     for lb, hold, k, spread in ((1, 3, 3, .002), (1, 6, 3, .002), (1, 12, 3, .002),
                                 (3, 6, 3, .004), (3, 12, 3, .004)):
         r, t = shock_reversal(op, cl, idx, lb, hold, k, spread)
@@ -213,6 +235,8 @@ def run() -> None:
     for j in range(len(SYMBOLS)):
         r, t = single_reversal(op, cl, idx, 24, 48, j)
         rows.append(summary(r, t, f"single_rev_24h_48h_{SYMBOLS[j]}"))
+    for lb, hold, k in ((4, 4, 3), (24, 12, 3), (24, 24, 2), (72, 24, 2)):
+        r, t = factor_residual(op, cl, idx, lb, hold, k); rows.append(summary(r, t, f"btc_residual_{lb}h_{hold}h_k{k}"))
     for lb, hold, k in ((1, 4, 3), (4, 4, 3), (24, 12, 3), (4, 12, 5)):
         r, t = residual_rank(op, cl, idx, lb, hold, k, hold); rows.append(summary(r, t, f"resid_median_{lb}h_{hold}h_k{k}"))
     r, t = pair_static(op, cl, idx); rows.append(summary(r, t, "pair_static_top5"))
@@ -220,6 +244,9 @@ def run() -> None:
     for ez, xz, mh in ((2.5, .5, 48), (3.0, .5, 48), (2.0, .25, 72), (2.5, .25, 72)):
         r, t = pair_dynamic(op, cl, idx, ez, xz, mh)
         rows.append(summary(r, t, f"pair_dynamic_e{ez}_x{xz}_h{mh}", fee_bp=1.0))
+    for ez, xz, mh in ((2.0, .25, 72), (2.5, .25, 72), (2.0, .5, 48)):
+        r, t = pair_dynamic(op, cl, idx, ez, xz, mh, "level")
+        rows.append(summary(r, t, f"pair_dynamic_level_e{ez}_x{xz}_h{mh}", fee_bp=1.0))
     out = pd.DataFrame(rows); out.to_csv(RESULTS / "candidate_5m_scan.csv", index=False)
     (RESULTS / "candidate_5m_scan_manifest.json").write_text(json.dumps({"cost_bp_one_way": 5.0, "models": [x[0] for x in specs], "signal": "close[t-1]", "entry": "open[t]", "tail_is_reused": True}, indent=2), encoding="utf-8")
     print(out.to_string(index=False))
