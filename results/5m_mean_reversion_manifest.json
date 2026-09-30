@@ -1,0 +1,68 @@
+{
+  "archive": "data/combined_5m_2024-02_to_2026-08.zip",
+  "archive_sha256": "a0aba52ca865bc50a6cb4d46c2d67670e6b2d8faeb25430197e3860ee30784ef",
+  "bar_interval": "5m",
+  "signal": "close[t-1] trailing cross-sectional log return",
+  "entry": "next bar open",
+  "exit": "next bar open after fixed hold; terminal close forced",
+  "cost_bp_one_way": 5.0,
+  "gross_fraction": 0.9,
+  "funding": "extended_funding + funding_api; missing is an error",
+  "funding_events": 56580,
+  "periods": {
+    "development": [
+      "2024-03-01",
+      "2025-03-01"
+    ],
+    "validation": [
+      "2025-03-01",
+      "2025-09-01"
+    ],
+    "historical_holdout": [
+      "2025-09-01",
+      "2026-03-01"
+    ],
+    "extension": [
+      "2026-03-01",
+      "2026-09-01"
+    ]
+  },
+  "rules": {
+    "xs_14d_28d_k2": [
+      14,
+      28,
+      2
+    ],
+    "xs_7d_14d_k2": [
+      7,
+      14,
+      2
+    ],
+    "xs_14d_14d_k2": [
+      14,
+      14,
+      2
+    ],
+    "xs_28d_28d_k2": [
+      28,
+      28,
+      2
+    ],
+    "xs_14d_42d_k2": [
+      14,
+      42,
+      2
+    ]
+  },
+  "selection": "primary rule fixed as 14d lookback/28d hold/k2; neighboring rules are robustness checks",
+  "clock_sensitivity": [
+    "phase 0/1 bar/1 hour/1 day",
+    "entry delay 1/2 bars"
+  ],
+  "cost_sensitivity": [
+    0,
+    2,
+    5,
+    10
+  ]
+}
