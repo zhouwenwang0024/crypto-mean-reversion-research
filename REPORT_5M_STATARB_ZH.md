@@ -77,6 +77,6 @@
 - 长周期网格、邻域、成本和分段：`statarb_long_horizon.py`、`statarb_long_horizon_neighbors.py`、`statarb_long_cost.py`、`statarb_long_segments.py`。
 - 结果：`results/statarb_5m_summary.csv`、`statarb_5m_cost_sensitivity.csv`、`statarb_5m_funding_sensitivity.csv`、`statarb_5m_event_attribution.csv`、`statarb_long_horizon_grid.csv`、`statarb_long_horizon_neighbors.csv`、`statarb_long_cost_sensitivity.csv`、`statarb_long_segments.csv`。
 - 旧结果事件独立审计：`src/extended_data/audit_reversal_event.py`及`results/reversal_event_*.csv/json`。
-- `tests/test_statarb_pair_engine.py`直接调用实际回测函数，验证未来收盘扰动、故意反转方向、手续费单调性和独立订单重放；三个测试函数直接调用均通过。项目pytest插件与旧pytest版本组合在收集阶段有兼容性错误，因此没有把该环境错误伪装成测试失败。
+- `tests/test_statarb_pair_engine.py`直接调用实际回测函数，验证未来收盘扰动、故意反转方向、手续费单调性、漏扣费反例、TLS法向量和形成后缀因果性；四个测试函数直接调用均通过。连同TLS几何测试共7项测试通过。项目pytest插件与旧pytest版本组合在收集阶段有兼容性错误，因此没有把该环境错误伪装成测试失败。
 
 结论是：旧的+42.73%不能称统计套利；严格的14天价差基准在5bp后全部亏损；允许冻结价差跨月并延长到56天后出现了+4.90%的探索性候选，但分段和空仓重启结果不稳定，当前证据不足以宣称可持续盈利。
