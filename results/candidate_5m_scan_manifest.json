@@ -1,0 +1,13 @@
+{
+  "cost_bp_one_way": 5.0,
+  "models": [
+    "cs_raw_1h_4h_k3",
+    "cs_raw_4h_4h_k3",
+    "cs_raw_24h_12h_k3",
+    "cs_z_4h_4h_k3",
+    "cs_z_24h_12h_k3"
+  ],
+  "signal": "close[t-1]",
+  "entry": "open[t]",
+  "tail_is_reused": true
+}
