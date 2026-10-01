@@ -1,0 +1,48 @@
+{
+  "model": "johansen",
+  "fee_bp_one_way": 5.0,
+  "funding_events": 56580,
+  "pair_budget": 0.2,
+  "max_pairs": 3,
+  "gross_cap_fraction": 0.9,
+  "entry_z": 1.0,
+  "exit_z": 0.1,
+  "stop_z": 2.0,
+  "rearm_z": 0.75,
+  "cooldown_hours": 12,
+  "max_hold_hours": 336,
+  "center_ratchet": 0.15,
+  "formation_max_age_days": 31,
+  "empty_formation_month": "no new trades; no stale pair invention",
+  "configs": [
+    {
+      "name": "resid_grid_1h_hl7d",
+      "observe_hours": 1,
+      "center_hours": 168,
+      "scale_hours": 168
+    },
+    {
+      "name": "resid_grid_4h_hl7d",
+      "observe_hours": 4,
+      "center_hours": 168,
+      "scale_hours": 168
+    },
+    {
+      "name": "resid_grid_1h_hl14d",
+      "observe_hours": 1,
+      "center_hours": 336,
+      "scale_hours": 336
+    },
+    {
+      "name": "resid_grid_4h_hl14d",
+      "observe_hours": 4,
+      "center_hours": 336,
+      "scale_hours": 336
+    }
+  ],
+  "execution": "completed close signal, next 5m open market fill; no passive limit assumption",
+  "same_timestamp_orders": "not netted; each leg charged 5 bp",
+  "gross_cap_check": "checked at open after entry/reduction fees; mark-to-market drift is reported",
+  "replay_check": "cash replay from order ledger plus funding; per-config error emitted in results",
+  "selection": "all configs fixed before results"
+}
