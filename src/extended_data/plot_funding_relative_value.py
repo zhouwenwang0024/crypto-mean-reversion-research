@@ -167,6 +167,53 @@ def plot_phase_cagr(results: pd.DataFrame, output_dir: Path) -> Path:
     return path
 
 
+def plot_attribution(results_dir: Path, output_dir: Path) -> Path:
+    curve = _read_equity(results_dir, PRIMARY)
+    daily = curve.set_index("time").resample("1D").last().dropna(subset=["equity"])
+    price_pnl = daily.equity - 1.0 - daily.funding + daily.fees
+    rolling = (daily.equity / daily.equity.shift(90)).pow(365.25 / 90.0) - 1.0
+    fig, axes = plt.subplots(2, 1, figsize=(13, 8), sharex=True)
+    axes[0].plot(daily.index, price_pnl, label="price PnL", lw=1.2)
+    axes[0].plot(daily.index, daily.funding, label="funding", lw=1.1)
+    axes[0].plot(daily.index, -daily.fees, label="-fees", lw=1.1)
+    axes[0].axhline(0, color="#555", lw=0.8)
+    axes[0].set_ylabel("Cumulative PnL")
+    axes[0].set_title("Primary account attribution")
+    axes[0].legend(frameon=False)
+    axes[1].plot(daily.index, 100 * rolling, color="#1464a0", lw=1.2)
+    axes[1].axhline(10, color="#b8860b", ls="--", lw=0.8, label="10% target")
+    axes[1].axhline(0, color="#555", lw=0.8)
+    axes[1].set_ylabel("90-day CAGR (%)")
+    axes[1].set_xlabel("UTC")
+    axes[1].legend(frameon=False)
+    for ax in axes:
+        _style(ax)
+    fig.tight_layout()
+    path = output_dir / "funding_relative_value_attribution.png"
+    fig.savefig(path, dpi=160)
+    plt.close(fig)
+    return path
+
+
+def plot_fee_sensitivity(results_dir: Path, output_dir: Path) -> Path:
+    frame = pd.read_csv(results_dir / "funding_relative_value_fee_sensitivity.csv")
+    fig, ax = plt.subplots(figsize=(9, 5))
+    ax.plot(frame.fee_bp_one_way, 100 * frame.cagr, marker="o", label="CAGR")
+    ax.plot(frame.fee_bp_one_way, 100 * frame.mdd, marker="o", label="MDD")
+    ax.axhline(10, color="#b8860b", ls="--", lw=0.8, label="10% CAGR target")
+    ax.axhline(0, color="#555", lw=0.8)
+    ax.set_xlabel("One-way fee (bp)")
+    ax.set_ylabel("Percent")
+    ax.set_title("Primary fee sensitivity")
+    ax.legend(frameon=False)
+    _style(ax)
+    fig.tight_layout()
+    path = output_dir / "funding_relative_value_fee_sensitivity.png"
+    fig.savefig(path, dpi=160)
+    plt.close(fig)
+    return path
+
+
 def _write_summary(results: pd.DataFrame, output_dir: Path) -> Path:
     primary = results.loc[results["config"] == PRIMARY].iloc[0]
     phase = primary[["development_cagr", "validation_cagr", "historical_holdout_cagr", "extension_cagr"]]
@@ -214,6 +261,8 @@ def main() -> None:
         plot_equity_drawdown(results_dir, output_dir),
         plot_parameter_heatmap(results, output_dir),
         plot_phase_cagr(results, output_dir),
+        plot_attribution(results_dir, output_dir),
+        plot_fee_sensitivity(results_dir, output_dir),
         _write_summary(results, output_dir),
     ]
     for path in paths:
