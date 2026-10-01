@@ -1,0 +1,62 @@
+{
+  "baseline": {
+    "name": "frv_lb21_k3_lag3",
+    "lookback_events": 21,
+    "hold_events": 21,
+    "k": 3,
+    "lag_events": 3
+  },
+  "fee_bp_one_way": 5.0,
+  "cost_cover_threshold": 9.523809523809524e-05,
+  "policies": [
+    {
+      "name": "baseline"
+    },
+    {
+      "name": "spread_cost_1x",
+      "spread_threshold": 9.523809523809524e-05
+    },
+    {
+      "name": "spread_20bp",
+      "spread_threshold": 0.0002
+    },
+    {
+      "name": "spread_30bp",
+      "spread_threshold": 0.0003
+    },
+    {
+      "name": "persistent_2",
+      "persistence": 2
+    },
+    {
+      "name": "persistent_3",
+      "persistence": 3
+    },
+    {
+      "name": "cost1_persist2",
+      "spread_threshold": 9.523809523809524e-05,
+      "persistence": 2
+    },
+    {
+      "name": "cost1_persist3",
+      "spread_threshold": 9.523809523809524e-05,
+      "persistence": 3
+    },
+    {
+      "name": "cooldown_1",
+      "cooldown_events": 1
+    },
+    {
+      "name": "cooldown_2",
+      "cooldown_events": 2
+    },
+    {
+      "name": "revert_exit_5bp",
+      "exit_spread": 5e-05
+    },
+    {
+      "name": "revert_exit_cost",
+      "exit_spread": 9.523809523809524e-05
+    }
+  ]
+}
