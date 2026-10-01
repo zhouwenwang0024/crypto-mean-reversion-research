@@ -1,0 +1,85 @@
+{
+  "sample_start": "2022-02-01T00:00:00+00:00",
+  "sample_end_exclusive": "2024-02-01T00:00:00+00:00",
+  "source": "data\\historical_5m",
+  "source_sha256": null,
+  "funding_dir": "data\\historical_funding",
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "XRPUSDT",
+    "DOGEUSDT",
+    "ADAUSDT",
+    "TRXUSDT",
+    "LINKUSDT",
+    "AVAXUSDT",
+    "LTCUSDT",
+    "BCHUSDT",
+    "DOTUSDT",
+    "HBARUSDT",
+    "XLMUSDT",
+    "FILUSDT",
+    "UNIUSDT",
+    "NEARUSDT",
+    "AAVEUSDT"
+  ],
+  "excluded": {
+    "SOLUSDT": "missing complete common kline/funding files"
+  },
+  "fee_bp_one_way": 5.0,
+  "policies": [
+    {
+      "name": "baseline",
+      "persistence": 1,
+      "spread_threshold": 0.0
+    },
+    {
+      "name": "cost1_persist3",
+      "persistence": 3,
+      "spread_threshold": 9.523809523809524e-05
+    }
+  ],
+  "rows": [
+    {
+      "policy": "baseline",
+      "return": -0.44043114924129234,
+      "cagr": -0.2521064051850117,
+      "mdd": -0.4869308656019753,
+      "trades": 63,
+      "fees": 0.04448982865789447,
+      "funding": 0.07674672118900223,
+      "gross_pnl": -0.47268804177240015,
+      "turnover": 88.97965731578886,
+      "max_open_gross_ratio": 0.9000000000000006,
+      "cap_open_violations": 0,
+      "time_in_market": 0.6273877473363775,
+      "skipped_infeasible": 1399,
+      "replay_error": -2.1094237467877974e-15,
+      "historical_first_half_return": -0.25401614610351286,
+      "historical_first_half_cagr": -0.2541658650190012,
+      "historical_second_half_return": -0.24989147173103088,
+      "historical_second_half_cagr": -0.25003918611627385
+    },
+    {
+      "policy": "cost1_persist3",
+      "return": -0.41954064745625774,
+      "cagr": -0.2382640644719235,
+      "mdd": -0.46482819937950526,
+      "trades": 60,
+      "fees": 0.04411696426070143,
+      "funding": 0.0793455319826565,
+      "gross_pnl": -0.4547692151782128,
+      "turnover": 88.2339285214029,
+      "max_open_gross_ratio": 0.9000000000000005,
+      "cap_open_violations": 0,
+      "time_in_market": 0.5972507610350076,
+      "skipped_infeasible": 1240,
+      "replay_error": 4.9960036108132044e-15,
+      "historical_first_half_return": -0.22752152236652023,
+      "historical_first_half_cagr": -0.22765809672538895,
+      "historical_second_half_return": -0.24857537219418224,
+      "historical_second_half_cagr": -0.24872244369977892
+    }
+  ]
+}

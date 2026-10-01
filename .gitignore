@@ -13,6 +13,9 @@ results/funding_relative_value_*_equity.csv
 results/funding_filter_*_equity.csv
 results/funding_filter_*_orders.csv
 results/funding_filter_*_trades.csv
+results/historical_funding_*_equity.csv
+results/historical_funding_*_orders.csv
+results/historical_funding_*_trades.csv
 long_run.log
 tmp/
 *.part

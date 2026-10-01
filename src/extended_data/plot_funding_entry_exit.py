@@ -119,6 +119,41 @@ def plot_fee_sensitivity(results_dir: Path, output_dir: Path) -> Path:
     return path
 
 
+def plot_historical_extension(results_dir: Path, output_dir: Path) -> Path:
+    """Plot the frozen rule on the independent 2022-02--2024-01 sample."""
+    files = {
+        "baseline": "historical_funding_baseline_equity.csv",
+        "cost1_persist3": "historical_funding_cost1_persist3_equity.csv",
+    }
+    fig, axes = plt.subplots(2, 1, figsize=(13, 8), sharex=True, height_ratios=[2, 1])
+    for policy, filename in files.items():
+        frame = pd.read_csv(results_dir / filename, parse_dates=["time"])
+        frame = frame.sort_values("time").drop_duplicates("time")
+        frame["equity"] = pd.to_numeric(frame["equity"], errors="coerce")
+        frame = frame.dropna(subset=["time", "equity"])
+        drawdown = frame["equity"] / frame["equity"].cummax() - 1.0
+        style = {"lw": 2.2 if policy == "cost1_persist3" else 1.3, "color": COLORS[policy]}
+        axes[0].plot(frame["time"], frame["equity"], label=LABELS[policy], **style)
+        axes[1].plot(frame["time"], 100 * drawdown, label=LABELS[policy], **style)
+    axes[0].axhline(1.0, color="#555", lw=0.8)
+    axes[0].set_ylabel("Equity (initial = 1)")
+    axes[0].set_title("Frozen funding filter on 2022-02 to 2024-01 historical extension")
+    axes[0].legend(frameon=False, loc="upper left")
+    axes[1].axhline(0, color="#555", lw=0.8)
+    axes[1].set_ylabel("Drawdown (%)")
+    axes[1].set_xlabel("UTC")
+    axes[1].xaxis.set_major_locator(mdates.MonthLocator(interval=3))
+    axes[1].xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
+    axes[1].tick_params(axis="x", rotation=30)
+    for ax in axes:
+        _style(ax)
+    fig.tight_layout()
+    path = output_dir / "funding_entry_exit_historical_extension.png"
+    fig.savefig(path, dpi=160)
+    plt.close(fig)
+    return path
+
+
 def write_summary(results_dir: Path, output_dir: Path) -> Path:
     frame = _read_experiments(results_dir).loc[list(POLICIES)]
     rows = []
@@ -146,12 +181,14 @@ def main() -> None:
     results_dir = args.results_dir.resolve()
     output_dir = (args.output_dir or results_dir).resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
-    paths = [
-        plot_equity_drawdown(results_dir, output_dir),
-        plot_phase_comparison(results_dir, output_dir),
-        plot_fee_sensitivity(results_dir, output_dir),
-        write_summary(results_dir, output_dir),
-    ]
+    paths = [plot_equity_drawdown(results_dir, output_dir),
+             plot_phase_comparison(results_dir, output_dir),
+             plot_fee_sensitivity(results_dir, output_dir)]
+    historical = [results_dir / "historical_funding_baseline_equity.csv",
+                  results_dir / "historical_funding_cost1_persist3_equity.csv"]
+    if all(path.exists() for path in historical):
+        paths.append(plot_historical_extension(results_dir, output_dir))
+    paths.append(write_summary(results_dir, output_dir))
     for path in paths:
         print(path)
 
