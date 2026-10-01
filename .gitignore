@@ -9,6 +9,7 @@ results/statarb_formation_diagnostics.csv
 results/statarb_selected_60d.csv
 results/target_predictor_diagnostics.csv
 results/target_predictor_*_equity.csv
+results/funding_relative_value_*_equity.csv
 long_run.log
 tmp/
 *.part
