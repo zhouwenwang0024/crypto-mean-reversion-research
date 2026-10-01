@@ -118,7 +118,9 @@ def run_policy(index, op, close, rates, marks, start: int, end: int,
 
         if t in pending_entry:
             signal_t, longs, shorts, weights = pending_entry.pop(t)
-            if not active:
+            signal_pos = pos_by_slot.get(signal_t, -10**9)
+            cooldown = int(policy.get("cooldown_events", 0))
+            if not active and (cooldown <= 0 or signal_pos - last_exit_event > cooldown):
                 equity = cash + float(q @ op[t]); gross = float(np.abs(q * op[t]).sum())
                 room = max(0.0, (GROSS * equity - gross) / (1.0 + GROSS * fee_rate))
                 if equity > 0 and room > 0:
@@ -154,8 +156,6 @@ def run_policy(index, op, close, rates, marks, start: int, end: int,
                 good = spread >= threshold
                 p = int(policy.get("persistence", 1))
                 good = good and _persistent(rates, slots, event_pos, cfg, p)
-                cooldown = int(policy.get("cooldown_events", 0))
-                good = good and event_pos - last_exit_event > cooldown
                 if good:
                     beta = market_betas(close, slots, event_pos)
                     weights, feasible = neutral_weights(beta, longs, shorts, GROSS, MAX_SINGLE)
