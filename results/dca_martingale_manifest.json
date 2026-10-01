@@ -1,0 +1,44 @@
+{
+  "strategy": "long_only_dca_martingale",
+  "bar_minutes": 15,
+  "symbols": [
+    "BTCUSDT",
+    "ETHUSDT",
+    "BNBUSDT",
+    "SOLUSDT",
+    "XRPUSDT",
+    "DOGEUSDT",
+    "ADAUSDT",
+    "TRXUSDT",
+    "LINKUSDT",
+    "SUIUSDT",
+    "AVAXUSDT",
+    "LTCUSDT",
+    "BCHUSDT",
+    "DOTUSDT",
+    "HBARUSDT",
+    "XLMUSDT",
+    "FILUSDT",
+    "UNIUSDT",
+    "NEARUSDT",
+    "AAVEUSDT"
+  ],
+  "sample": [
+    "2026-03-01 00:00:00+00:00",
+    "2026-09-01 00:00:00+00:00"
+  ],
+  "validation": [
+    "2026-05-01 00:00:00+00:00",
+    "2026-07-01 00:00:00+00:00"
+  ],
+  "holdout": [
+    "2026-07-01 00:00:00+00:00",
+    "2026-09-01 00:00:00+00:00"
+  ],
+  "grid_rows": 288,
+  "fee_bp": 5.0,
+  "base_fraction": 0.05,
+  "max_position_fraction": 0.75,
+  "funding": "local results/funding_api",
+  "selection": "0.30 mean return + 0.30 median return + 0.20 p10 return + 0.20 median drawdown, with trade and positive-coin gates"
+}

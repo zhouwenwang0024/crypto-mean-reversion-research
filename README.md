@@ -26,6 +26,16 @@ python -m pytest -p no:pytest_anchorpy -p no:anyio -p no:requests_mock -p no:pyt
 
 v3 预先声明并去重后运行 67 个配置，主网格使用 2 bp gross 成本；5 个固定模型控制和 5 个验证期代表配置另做 0、1、2、3 bp 敏感性。最终结果没有显示稳定的成本后多标的优势，不能直接用于实盘。
 
+## Long-only DCA / Martingale
+
+仅做多的分层加仓回测使用 15 分钟K线，均线站上后解锁，按峰值回撤触发首单，按上次实际成交金额倍增加仓，并以篮子均价止盈/止损。它逐币独立运行，计入5bp手续费和本地资金费，不修改环境变量，也不联网下载数据。
+
+```powershell
+python src/dca_martingale.py
+```
+
+参数只在 2026-05-01 至 2026-07-01 验证期按20币鲁棒分数选择，2026-07-01 至 2026-09-01 留作留出评估。结果写入 `results/dca_martingale_grid.csv`、`results/dca_martingale_coin_results.csv`、`results/dca_martingale_trades.csv` 和 `REPORT_DCA_MARTINGALE_ZH.md`。
+
 主要结果文件：
 
 - `REPORT_V3.md`：最新研究报告、公式、开平逻辑、审计与限制。

@@ -1,0 +1,24 @@
+[
+  {
+    "ma_hours":12,
+    "first_drop_pct":0.04,
+    "add_step_pct":0.02,
+    "multiplier":1.5,
+    "take_profit_pct":0.01,
+    "stop_loss_pct":0.1,
+    "max_legs":4,
+    "valid_mean_return":-0.0015820412,
+    "valid_median_return":0.0143924758,
+    "valid_p10_return":-0.0331650989,
+    "valid_worst_return":-0.1061217899,
+    "valid_median_drawdown":-0.0319984572,
+    "valid_worst_drawdown":-0.1269830615,
+    "valid_positive_coins":11,
+    "valid_trades":570,
+    "valid_score":-0.0091895808,
+    "holdout_mean_return":0.0085843937,
+    "holdout_median_return":0.0088297906,
+    "holdout_positive_coins":18,
+    "holdout_trades":379
+  }
+]
